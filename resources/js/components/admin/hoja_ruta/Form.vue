@@ -1,7 +1,7 @@
 <template>
   <v-dialog persistent v-model="dialog" max-width="900px" @keydown.esc="close">
     <v-tooltip slot="activator" top>
-      <v-icon large slot="activator" dark color="indigo" @click="getCorrelativo()">add_circle</v-icon>
+      <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
       <span>Nuevo</span>
     </v-tooltip>
     <v-card>
@@ -67,11 +67,6 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-form ref="form2" v-model="valid" lazy-validation>
-                <v-text-field
-                  v-model="selectedItem.correlativo"
-                  label="Correlativo hoja de ruta"
-                  disabled
-                ></v-text-field>
                 <v-text-field
                   v-model="selectedItem.codigo_comercializador"
                   label="Codigo de Comercializador"
@@ -375,7 +370,6 @@ export default {
           if (this.selectedIndex != -1) {
             await axios.put("api/hoja_ruta/"+this.selectedItem.id, this.selectedItem)
           } else {
-            this.selectedItem.id_hoja_ruta = this.correlativo
             await axios.post("api/hoja_ruta", this.selectedItem)
           }
           this.$toast.success('Correcto.')

@@ -29,7 +29,13 @@ class HojaRutaController extends Controller
      */
     public function store(Request $request)
     {
-        // return HojaRuta::create($request->all());
+        $correlativo = 1;        
+        $data = HojaRuta::where('correlativo', HojaRuta::max('correlativo'))->first();
+        if ($data) {
+            $correlativo = explode('/', $data->correlativo)[0] + 1;
+            
+        }
+        $request['correlativo'] = $correlativo.'/'.\Carbon::now()->year;
         $request->control = true;
         $hoja_ruta = HojaRuta::create($request->all());
         return ControlHojaRuta::create([
