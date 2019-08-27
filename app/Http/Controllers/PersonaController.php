@@ -14,7 +14,7 @@ class PersonaController extends Controller
      */
     public function index() 
     {
-        return Persona::with('tipo_persona', 'departamento_extension', 'pais_nacimiento', 'departamento_nacimiento', 'provincia_nacimiento', 'persona', 'persona.departamento_extension', 'sustitucion', 'cesaciones', 'resoluciones_administrativas')->get();        
+        return Persona::with('tipo_persona', 'departamento_extension', 'pais_nacimiento', 'departamento_nacimiento', 'provincia_nacimiento', 'persona', 'persona.departamento_extension', 'sustitucion', 'cesaciones', 'resoluciones_administrativas', 'puestos_venta')->get();        
     }
 
     /**

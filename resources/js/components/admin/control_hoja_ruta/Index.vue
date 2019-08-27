@@ -74,9 +74,6 @@
                   <v-list-tile @click="printItem(props.item)">
                     <v-list-tile-title>Hoja de ruta</v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile @click="printRetencionItem(props.item)" v-if="props.item.hoja_ruta.retenido">
-                    <v-list-tile-title>Retención</v-list-tile-title>
-                  </v-list-tile>
                 </v-list>
               </v-menu>
 
