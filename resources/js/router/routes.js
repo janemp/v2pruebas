@@ -32,6 +32,7 @@ export default [
         { path: 'empresas', name: 'empresa', component: require('$comp/admin/empresa/Index'), meta: {rule: 'digcoin'} },
         { path: 'entidad-de-investigacion', name: 'entidad_investigacion', component: require('$comp/admin/entidad_investigacion/Index'), meta: {rule: 'digcoin'} },
         { path: 'beneficiarios-de-donaciones', name: 'beneficiario_donacion', component: require('$comp/admin/beneficiario_donacion/Index'), meta: {rule: 'digcoin'} },
+        { path: 'beneficiarios-de-desarrollo', name: 'beneficiario_desarrollo', component: require('$comp/admin/beneficiario_desarrollo/Index'), meta: {rule: 'digcoin'} },
         
         
 

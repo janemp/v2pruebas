@@ -139,6 +139,8 @@
                   { title: 'Empresas de industrialización', icon: 'forward', to: {name: 'empresa'}, exact: false},
                   { title: 'Entidades de investigación', icon: 'forward', to: {name: 'entidad_investigacion'}, exact: false},
                   { title: 'Beneficiarios de donaciones', icon: 'forward', to: {name: 'beneficiario_donacion'}, exact: false},
+                  { title: 'Beneficiarios para proyectos de desarrollo integral', icon: 'forward', to: {name: 'beneficiario_desarrollo'}, exact: false},
+                  
                 ]
               }
             ],            
@@ -228,6 +230,7 @@
                   { title: 'Empresas de industrialización', icon: 'forward', to: {name: 'empresa'}, exact: false},
                   { title: 'Entidades de investigación', icon: 'forward', to: {name: 'entidad_investigacion'}, exact: false},
                   { title: 'Beneficiarios de donaciones', icon: 'forward', to: {name: 'beneficiario_donacion'}, exact: false},
+                  { title: 'Beneficiarios para proyectos de desarrollo integral', icon: 'forward', to: {name: 'beneficiario_desarrollo'}, exact: false},
                 ]
               }
             ],
