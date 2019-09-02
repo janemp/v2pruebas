@@ -68,7 +68,7 @@ export default [
         /* 9 Modulo de Usuarios y roles */
 
         /* 10 Modulo de parametrizado */
-        { path: 'zona_productiva', name: 'zona_productiva', component: require('$comp/admin/zona_productiva/Index'), meta: {rule: 'admin'} },
+        { path: 'zona_autorizada', name: 'zona_autorizada', component: require('$comp/admin/zona_autorizada/Index'), meta: {rule: 'admin'} },
         { path: 'departamentos', name: 'departamento', component: require('$comp/admin/departamento/Index'), meta: {rule: 'admin'} },
         { path: 'provincias', name: 'provincia', component: require('$comp/admin/provincia/Index'), meta: {rule: 'admin'} },
         { path: 'municipios', name: 'municipio', component: require('$comp/admin/municipio/Index'), meta: {rule: 'admin'} },

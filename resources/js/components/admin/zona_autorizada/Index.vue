@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-toolbar>
-        <v-toolbar-title>Zonas Productivas</v-toolbar-title>
+        <v-toolbar-title>Zonas Autorizadas</v-toolbar-title>
         <v-spacer></v-spacer>        
         <v-divider
           class="mx-2"
@@ -119,7 +119,7 @@ export default {
   methods: {
     async getTable() {
       try {
-        let res = await axios.get("api/zona_productiva")
+        let res = await axios.get("api/zona_autorizada")
         this.table = res.data;
       } catch (e) {
         console.log(e);
@@ -129,7 +129,7 @@ export default {
       this.bus.$emit("openDialog", item);
     },
     async removeItem(item) {
-      this.bus.$emit("openDialogRemove", `api/zona_productiva/${item.id}`);      
+      this.bus.$emit("openDialogRemove", `api/zona_autorizada/${item.id}`);      
     },
   }
 };

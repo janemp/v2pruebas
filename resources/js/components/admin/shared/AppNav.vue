@@ -169,7 +169,7 @@
                 title: 'Módulo de Parametrización', 
                 icon: 'list',
                 items: [
-                  { title: 'Zonas Productivas', icon: 'forward', to: {name: 'zona_productiva'}, exact: false},
+                  { title: 'Zonas Autorizadas', icon: 'forward', to: {name: 'zona_autorizada'}, exact: false},
                   { title: 'Departamentos', icon: 'forward', to: {name: 'departamento'}, exact: false},
                   { title: 'Provincias', icon: 'forward', to: {name: 'provincia'}, exact: false},
                   { title: 'Municipios', icon: 'forward', to: {name: 'municipio'}, exact: false},

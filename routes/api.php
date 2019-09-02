@@ -228,8 +228,8 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::delete('tipo_resolucion/{id}', 'TipoResolucionController@destroy')->middleware('permission:eliminar');
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {
-        Route::get('zona_productiva/fill/{param}', 'ZonaProductivaController@fill');
-        Route::resource('zona_productiva', 'ZonaProductivaController');
+        Route::get('zona_autorizada/fill/{param}', 'ZonaAutorizadaController@fill');
+        Route::resource('zona_autorizada', 'ZonaAutorizadaController');
         Route::get('departamento/fill/{param}', 'DepartamentoController@fill');
         Route::resource('departamento', 'DepartamentoController');
         Route::get('provincia/fill/{param}', 'ProvinciaController@fill');

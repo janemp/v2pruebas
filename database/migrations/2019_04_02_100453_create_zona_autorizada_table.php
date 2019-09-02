@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductiveZoneTable extends Migration
+class CreateZonaAutorizadaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProductiveZoneTable extends Migration
      */
     public function up()
     {
-        Schema::create('zona_productiva', function (Blueprint $table) {
+        Schema::create('zona_autorizada', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo');
             $table->string('nombre');
@@ -31,6 +31,6 @@ class CreateProductiveZoneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zona_productiva');
+        Schema::dropIfExists('zona_autorizada');
     }
 }

@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ZonaProductiva extends Model
+class ZonaAutorizada extends Model
 {
     use SoftDeletes;
-    protected $table = 'zona_productiva';
+    protected $table = 'zona_autorizada';
 
     protected $fillable = [
         'codigo', 'nombre', 'descripcion', 'color'
