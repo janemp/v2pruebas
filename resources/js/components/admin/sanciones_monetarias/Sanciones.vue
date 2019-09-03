@@ -11,7 +11,7 @@
           inset
           vertical
         ></v-divider>
-        
+    
       </v-toolbar>
      
       <v-card-text>
