@@ -19,7 +19,7 @@ class TiposResolucionSeeder extends Seeder
             ['id' => '5', 'nombre' => 'Devoluciones'],
             ['id' => '6', 'nombre' => 'Donaciones'],
             ['id' => '7', 'nombre' => 'Incineraciones'],
-            ['id' => '8', 'nombre' => 'Investigación, industrialización y/o producción de abono'],
+            /*['id' => '8', 'nombre' => 'Investigación, industrialización y/o producción de abono'],*/  
 		];	foreach ($data as $data) {
 			App\TipoResolucion::create($data);
 		}

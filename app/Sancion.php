@@ -18,10 +18,15 @@ class Sancion extends Model
      * @var array
      */
     protected $fillable = [
-        'infraccion_id', 'codigo', 'nombre', 'descripcion'
+        'infraccion_id', 'codigo', 'nombre', 'descripcion','monto','bloqueante','estado'
     ];
 
     public function infraccion(){
         return $this->belongsTo(Infraccion::class);
+    }
+
+    public function tipo_sancion() 
+    {
+        return $this->belongsTo(TipoSancion::class);
     }
 }

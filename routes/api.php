@@ -226,6 +226,17 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::post('tipo_resolucion', 'TipoResolucionController@store')->middleware('permission:registrar');
         Route::put('tipo_resolucion/{id}', 'TipoResolucionController@update')->middleware('permission:editar');
         Route::delete('tipo_resolucion/{id}', 'TipoResolucionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('tipo_sancion', 'TipoSancionController@index')->middleware('permission:listar');
+        Route::post('tipo_sancion', 'TipoSancionController@store')->middleware('permission:registrar');
+        Route::put('tipo_sancion/{id}', 'TipoSancionController@update')->middleware('permission:editar');
+        Route::delete('tipo_sancion/{id}', 'TipoSancionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('sancion/fill/{param}', 'SancionController@fill');
+        Route::get('sancion', 'SancionController@index')->middleware('permission:listar');
+        Route::post('sancion', 'SancionController@store')->middleware('permission:registrar');
+        Route::put('sancion/{id}', 'SancionController@update')->middleware('permission:editar');
+        Route::delete('sancion/{id}', 'SancionController@destroy')->middleware('permission:eliminar');
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {
         Route::get('zona_productiva/fill/{param}', 'ZonaProductivaController@fill');
