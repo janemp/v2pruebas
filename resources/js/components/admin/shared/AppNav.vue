@@ -195,7 +195,8 @@
                 icon: 'list',
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
-                  { title: 'Consulta de Resoluciones Administrativas', icon: 'forward', to: {name: 'consulta_resolucion_administrativa'}, exact: false},
+                  { title: 'Consulta de resoluciones administrativas', icon: 'forward', to: {name: 'consulta_res_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false},
                 ]
               }
             ],
@@ -262,6 +263,7 @@
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
                   { title: 'Consulta de Resoluciones Administrativas', icon: 'forward', to: {name: 'consulta_resolucion_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false}, 
                 ]
               }
             ],
@@ -292,6 +294,7 @@
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
                   { title: 'Consulta de Resoluciones Administrativas', icon: 'forward', to: {name: 'consulta_resolucion_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false},
                 ]
               }
             ],

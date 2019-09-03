@@ -1,9 +1,5 @@
 <template>
   <v-dialog persistent v-model="dialog" max-width="900px" @keydown.esc="close">
-    <!-- <v-tooltip slot="activator" top>
-      <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
-      <span>Nuevo</span>
-    </v-tooltip> -->
     <v-card>
       <v-toolbar dark color="primary">
         <v-toolbar-title class="white--text">{{ formTitle }}</v-toolbar-title>
@@ -17,7 +13,8 @@
             @change="verificarResolucion()"
             :rules="[v => !!v || 'Requerido', v => (v && v.length <= 500) || 'No mayor a 500 caracteres']"
             hint="<span class='blue--text'>*Requerido</span>" persistent-hint                  
-          ></v-text-field>
+          ></v-text-field> 
+                   
           <v-menu
             v-model="menu"
             :close-on-content-click="false"

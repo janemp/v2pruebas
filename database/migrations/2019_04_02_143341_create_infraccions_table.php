@@ -19,6 +19,8 @@ class CreateInfraccionsTable extends Migration
             $table->string('nombre', 100);
             $table->string('descripcion', 500);
             $table->string('severidad', 10);
+            $table->boolean('bloqueante')->default(false);
+            $table->string('estado',1);
             $table->timestamps();
             $table->softDeletes();
         });

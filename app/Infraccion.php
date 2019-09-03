@@ -18,7 +18,7 @@ class Infraccion extends Model
      * @var array
      */
     protected $fillable = [
-        'severidad', 'codigo', 'nombre', 'descripcion'
+        'codigo', 'nombre', 'descripcion', 'severidad', 'bloqueante','estado'
     ];
 
     
