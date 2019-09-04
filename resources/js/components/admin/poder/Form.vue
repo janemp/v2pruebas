@@ -87,8 +87,6 @@
                       <v-text-field
                         v-model="selectedItem.segundo_apellido"
                         label="Segundo apellido"
-                        :rules="[v => !!v || 'Requerido', v => (v && v.length <= 30) || 'No mayor a 30 caracteres']"
-                        hint="<span class='blue--text'>*Requerido</span>" persistent-hint
                       ></v-text-field>
                     </v-flex>
                   </v-layout>
