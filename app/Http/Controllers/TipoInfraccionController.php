@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ZonaProductiva;
 
-class ZonaProductivaController extends Controller
+class TipoInfraccionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class ZonaProductivaController extends Controller
      */
     public function index()
     {
-        return ZonaProductiva::get();
+        return TipoInfraccion::get(); 
     }
 
     /**
@@ -25,7 +24,7 @@ class ZonaProductivaController extends Controller
      */
     public function store(Request $request)
     {
-        return ZonaProductiva::create($request->all());
+        return TipoInfraccion::create($request->all());
     }
 
     /**
@@ -36,7 +35,7 @@ class ZonaProductivaController extends Controller
      */
     public function show($id)
     {
-        return ZonaProductiva::findOrFail($id);
+        return TipoInfraccion::findOrFail($id);
     }
 
     /**
@@ -48,10 +47,10 @@ class ZonaProductivaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $zona = ZonaProductiva::findOrFail($id);
-        $zona->fill($request->all());
-        $zona->save();
-        return $zona;
+        $data=Tipofraccion::findOrFail($id);
+        $data->fill($request->all());
+        $data->save();
+        return $data;
     }
 
     /**
@@ -62,14 +61,7 @@ class ZonaProductivaController extends Controller
      */
     public function destroy($id)
     {
-        $zona = ZonaProductiva::findOrFail($id);
-        $zona->delete();
-        return $zona;
-    }
-
-    public function fill($request) 
-    {
-        $request = json_decode($request, true);
-        return ZonaProductiva::where($request)->get();
+        $data=TipoInfraccion::findOrFail($id);
+        $data->delete();
     }
 }

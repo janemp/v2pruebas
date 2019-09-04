@@ -63,7 +63,7 @@
                 </v-btn>
                 <span>Retener</span>
               </v-tooltip>
-              <v-menu offset-y>
+              <!-- <v-menu offset-y>
                 <v-tooltip top slot="activator">
                   <v-btn slot="activator" flat icon color="indigo">
                     <v-icon>print</v-icon>
@@ -74,11 +74,8 @@
                   <v-list-tile @click="printItem(props.item)">
                     <v-list-tile-title>Hoja de ruta</v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile @click="printRetencionItem(props.item)" v-if="props.item.hoja_ruta.retenido">
-                    <v-list-tile-title>Retención</v-list-tile-title>
-                  </v-list-tile>
                 </v-list>
-              </v-menu>
+              </v-menu> -->
 
             </td>
           </tr>

@@ -83,7 +83,7 @@ Route::group(['middleware' => ['jwt']], function() {
 
         Route::get('hoja_ruta/max/{param}', 'HojaRutaController@max')->middleware('permission:listar');
         Route::get('hoja_ruta/fill/{param}', 'HojaRutaController@fill')->middleware('permission:listar');
-        Route::get('hoja_ruta/print/{id}', 'HojaRutaController@print')->middleware('permission:imprimir');
+        Route::get('hoja_ruta/print/{id}', 'HojaRutaController@print')->middleware(['permission:imprimir', 'role:admin']);
         Route::get('hoja_ruta', 'HojaRutaController@index')->middleware('permission:listar');
         Route::post('hoja_ruta', 'HojaRutaController@store')->middleware('permission:registrar');
         Route::put('hoja_ruta/{id}', 'HojaRutaController@update')->middleware('permission:editar');
@@ -226,10 +226,21 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::post('tipo_resolucion', 'TipoResolucionController@store')->middleware('permission:registrar');
         Route::put('tipo_resolucion/{id}', 'TipoResolucionController@update')->middleware('permission:editar');
         Route::delete('tipo_resolucion/{id}', 'TipoResolucionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('tipo_sancion', 'TipoSancionController@index')->middleware('permission:listar');
+        Route::post('tipo_sancion', 'TipoSancionController@store')->middleware('permission:registrar');
+        Route::put('tipo_sancion/{id}', 'TipoSancionController@update')->middleware('permission:editar');
+        Route::delete('tipo_sancion/{id}', 'TipoSancionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('sancion/fill/{param}', 'SancionController@fill');
+        Route::get('sancion', 'SancionController@index')->middleware('permission:listar');
+        Route::post('sancion', 'SancionController@store')->middleware('permission:registrar');
+        Route::put('sancion/{id}', 'SancionController@update')->middleware('permission:editar');
+        Route::delete('sancion/{id}', 'SancionController@destroy')->middleware('permission:eliminar');
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {
-        Route::get('zona_productiva/fill/{param}', 'ZonaProductivaController@fill');
-        Route::resource('zona_productiva', 'ZonaProductivaController');
+        Route::get('zona_autorizada/fill/{param}', 'ZonaAutorizadaController@fill');
+        Route::resource('zona_autorizada', 'ZonaAutorizadaController');
         Route::get('departamento/fill/{param}', 'DepartamentoController@fill');
         Route::resource('departamento', 'DepartamentoController');
         Route::get('provincia/fill/{param}', 'ProvinciaController@fill');

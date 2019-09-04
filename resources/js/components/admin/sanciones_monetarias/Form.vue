@@ -12,8 +12,18 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-layout wrap>
             <v-flex xs12 sm6 md6>
-              <v-card-text>              
-                <v-text-field
+              <v-card-text>                
+                <v-select  
+                  v-model="selectedItem.tipo_sancion_id"
+                  :items="tiposSancion"
+                  item-text="nombre"
+                  item-value="id"
+                  label="Tipo de Sanción"
+                  :rules="[v => !!v || 'Requerido']"
+                  hint="<span class='blue--text'>*Requerido</span>" persistent-hint
+
+                ></v-select>
+                <v-text-field 
                   v-model="selectedItem.codigo"
                   label="Codigo"
                   :rules="[v => !!v || 'Requerido', v => (v && v.length <= 5) || 'No mayor a 5 caracteres']"
@@ -24,24 +34,17 @@
                 <v-text-field
                   v-model="selectedItem.nombre"
                   label="Nombre"
-                  :rules="[v => !!v || 'Requerido', v => (v && v.length <= 50) || 'No mayor a 50 caracteres']"
+                  :rules="[v => !!v || 'Requerido', v => (v && v.length <= 100) || 'No mayor a 100 caracteres']"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
                 ></v-text-field>
               </v-card-text>
             </v-flex>
             <v-spacer></v-spacer>
             <v-flex xs12 sm6 md6>
-              <v-card-text>  
-                <v-text-field
-                  v-model="selectedItem.sigla"
-                  label="Sigla"
-                  :rules="[v => !!v || 'Requerido', v => (v && v.length <= 3) || 'No mayor a 3 caracteres']"
-                  hint="<span class='blue--text'>*Requerido</span>" persistent-hint
-                ></v-text-field>              
+              <v-card-text>                
                 <v-textarea
                   v-model="selectedItem.descripcion"
                   label="Descripción"
-                  rows="1"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
                 ></v-textarea>                
               </v-card-text>
@@ -63,6 +66,9 @@ import Vue from 'vue'
 import axios from 'axios'
 
 export default {
+  components: {
+    
+  },  
   props: ["item", "bus"],  
   data() {
     return {      
@@ -70,16 +76,19 @@ export default {
       dialog: false,
       selectedIndex: -1,     
       selectedItem: {},
+      tiposSancion: [],
       error: ''
     };
   },
   created() {},  
   mounted() {
-    this.bus.$on("openDialog", item => {
+    this.bus.$on("openDialogForm", item => {
       this.selectedItem = item;
       this.dialog = true;
-      this.selectedIndex = item;
+      this.selectedIndex = item;      
     });
+    this.getTiposSancion()
+   
   },
   computed: {
     formTitle() {
@@ -87,10 +96,20 @@ export default {
     }    
   },
   methods: {
+    async getInfracciones() {
+      let res = await axios.get("api/infraccion")
+      this.infracciones = res.data
+    },
+
+    async getTiposSancion() {
+      let res = await axios.get("api/tipo_sancion")
+      this.tiposSancion = res.data
+    },
+
     close() {
       this.dialog = false;
       this.$refs.form.reset()
-      this.bus.$emit("closeDialog");
+      this.bus.$emit("closeDialogForm");
       this.selectedIndex = -1;
       this.selectedItem = {}
     },
@@ -98,9 +117,9 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           if (this.selectedIndex != -1) {
-            await axios.put("api/departamento/"+this.selectedItem.id, this.selectedItem)
+            await axios.put("api/sancion/"+this.selectedItem.id, this.selectedItem)
           } else {
-            await axios.post("api/departamento", this.selectedItem)
+            await axios.post("api/sancion", this.selectedItem)
           }
           this.$toast.success('Correcto.')
           this.close();
@@ -109,20 +128,11 @@ export default {
         console.log(e)
       }
     },
-    async codevalidate(){
-      var params = {'codigo': this.selectedItem.codigo}
-      let res = await axios.get('api/departamento/show_fill/'+JSON.stringify(params))
-      if(res.data.length > 0){
-        this.error = 'El codigo ya existe'
-      }
-      else{
-        this.error = ''
-      }
-    },
-    async getZonasProductivas() {
-      let res = await axios.get("api/zona_autorizada")
-      this.zonas_productivas = res.data
-    },
+    codevalidate(){
+      axios.get('/api/sancion/codigo/'+this.selectedItem.codigo).then(response =>{
+        this.error = response.data;
+      });
+    }
   },  
 };
 </script>

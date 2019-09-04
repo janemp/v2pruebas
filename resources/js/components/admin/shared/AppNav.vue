@@ -139,6 +139,8 @@
                   { title: 'Empresas de industrialización', icon: 'forward', to: {name: 'empresa'}, exact: false},
                   { title: 'Entidades de investigación', icon: 'forward', to: {name: 'entidad_investigacion'}, exact: false},
                   { title: 'Beneficiarios de donaciones', icon: 'forward', to: {name: 'beneficiario_donacion'}, exact: false},
+                  { title: 'Beneficiarios para proyectos de desarrollo integral', icon: 'forward', to: {name: 'beneficiario_desarrollo'}, exact: false},
+                  
                 ]
               }
             ],            
@@ -167,7 +169,7 @@
                 title: 'Módulo de Parametrización', 
                 icon: 'list',
                 items: [
-                  { title: 'Zonas Productivas', icon: 'forward', to: {name: 'zona_productiva'}, exact: false},
+                  { title: 'Zonas Autorizadas', icon: 'forward', to: {name: 'zona_autorizada'}, exact: false},
                   { title: 'Departamentos', icon: 'forward', to: {name: 'departamento'}, exact: false},
                   { title: 'Provincias', icon: 'forward', to: {name: 'provincia'}, exact: false},
                   { title: 'Municipios', icon: 'forward', to: {name: 'municipio'}, exact: false},
@@ -193,6 +195,8 @@
                 icon: 'list',
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
+                  { title: 'Consulta de resoluciones administrativas', icon: 'forward', to: {name: 'consulta_res_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false},
                 ]
               }
             ],
@@ -228,6 +232,7 @@
                   { title: 'Empresas de industrialización', icon: 'forward', to: {name: 'empresa'}, exact: false},
                   { title: 'Entidades de investigación', icon: 'forward', to: {name: 'entidad_investigacion'}, exact: false},
                   { title: 'Beneficiarios de donaciones', icon: 'forward', to: {name: 'beneficiario_donacion'}, exact: false},
+                  { title: 'Beneficiarios para proyectos de desarrollo integral', icon: 'forward', to: {name: 'beneficiario_desarrollo'}, exact: false},
                 ]
               }
             ],
@@ -257,6 +262,8 @@
                 icon: 'list',
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
+                  { title: 'Consulta de Resoluciones Administrativas', icon: 'forward', to: {name: 'consulta_resolucion_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false}, 
                 ]
               }
             ],
@@ -286,6 +293,8 @@
                 icon: 'list',
                 items: [
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
+                  { title: 'Consulta de Resoluciones Administrativas', icon: 'forward', to: {name: 'consulta_resolucion_administrativa'}, exact: false},
+                  { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false},
                 ]
               }
             ],

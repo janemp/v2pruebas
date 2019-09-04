@@ -370,7 +370,8 @@ export default {
           if (this.selectedIndex != -1) {
             await axios.put("api/hoja_ruta/"+this.selectedItem.id, this.selectedItem)
           } else {
-            await axios.post("api/hoja_ruta", this.selectedItem)
+            let res = await axios.post("api/hoja_ruta", this.selectedItem)
+            this.printItem(res.data)
           }
           this.$toast.success('Correcto.')
           this.close();
@@ -445,6 +446,19 @@ export default {
     async getCorrelativo() {
       let res = await axios.get("api/hoja_ruta/max/correlativo")
       this.selectedItem.correlativo = res.data
+    },
+    async printItem(item) {
+      try {        
+        let res = await axios({
+          method: "GET",
+          url: "api/hoja_ruta/print/" + item.id,
+          responseType: "arraybuffer"
+        });
+        let blob = new Blob([res.data], {type: "application/pdf"});
+        printJS(window.URL.createObjectURL(blob));
+      } catch (e) {
+        console.log(e);
+      }
     },
     addMarker: function addMarker() {
       this.lastId++;

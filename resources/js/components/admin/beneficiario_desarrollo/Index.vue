@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-toolbar>
-        <v-toolbar-title>Instituciones y entidades de investigación</v-toolbar-title>
+        <v-toolbar-title>Beneficiarios de proyectos de desarrollo integral</v-toolbar-title>
         <v-spacer></v-spacer>   
         <v-divider
           class="mx-2"
@@ -35,12 +35,12 @@
         class="elevation-1">
         <template slot="items" slot-scope="props">
           <tr>
-            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.nombre }} </td>
-            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.direccion }} </td>
-            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.telefono }} </td>
+            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ fullName(props.item) }} </td>
+            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.carnet_identidad + ' ' + props.item.departamento_extension.sigla }} </td>
+            <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.estado_civil }} </td>
             <td class="justify-center layout">
               <v-tooltip top>
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item, {sustituir: false})">
+                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
                   <v-icon>edit</v-icon>
                 </v-btn>
                 <span>Editar</span>
@@ -61,63 +61,48 @@
                 <v-flex xs3>
                   <v-avatar
                     size="150px">
-                    <img v-bind:src="props.item.persona.fotografia">
+                    <img v-bind:src="props.item.fotografia">
                   </v-avatar>
                 </v-flex>
                 <v-flex xs9>
                   <table class="v-table theme--light">
                     <tr>
-                      <th class="text-xs-center" colspan="2">REPRESENTANTE LEGAL</th>
-                    </tr>
-                    <tr>
-                      <th class="text-xs-left">Nombre: </th>
-                      <td class="text-xs-left">{{ fullName(props.item.persona) }}</td>
-                    </tr>
-                    <tr>
-                      <th class="text-xs-left">CI: </th>
-                      <td class="text-xs-left">{{ props.item.persona.carnet_identidad + ' ' + props.item.persona.departamento_extension.sigla }}</td>
-                    </tr>                  
-                    <tr>
-                      <th class="text-xs-left">Estado civil: </th>
-                      <td class="text-xs-left">{{ props.item.persona.estado_civil }}</td>
-                    </tr>
-                    <tr>
                       <th class="text-xs-left">Genero: </th>
-                      <td class="text-xs-left">{{ (props.item.persona.genero=='M')?'Masculino':'Femenino' }}</td>
+                      <td class="text-xs-left">{{ (props.item.genero=='M')?'Masculino':'Femenino' }}</td>
                     </tr>                  
                     <tr>
                       <th class="text-xs-left">Telefono: </th>
-                      <td class="text-xs-left">{{ props.item.persona.telefono }}</td>
+                      <td class="text-xs-left">{{ props.item.telefono }}</td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Email: </th>
-                      <td class="text-xs-left">{{ props.item.persona.email }}</td>
+                      <td class="text-xs-left">{{ props.item.email }}</td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Domicilio: </th>
-                      <td class="text-xs-left">{{ props.item.persona.domicilio }}</td>
+                      <td class="text-xs-left">{{ props.item.domicilio }}</td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Fecha de nacimiento: </th>
-                      <td class="text-xs-left">{{ formatDate(props.item.persona.fecha_nacimiento) }}</td>
+                      <td class="text-xs-left">{{ formatDate(props.item.fecha_nacimiento) }}</td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Pais de nacimiento: </th>
-                      <td class="text-xs-left">{{ props.item.persona.pais_nacimiento.nombre }}</td>
+                      <td class="text-xs-left">{{ props.item.pais_nacimiento.nombre }}</td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Departamento de nacimiento: </th>
                       <td class="text-xs-left">
-                        <span v-if="props.item.persona.departamento_nacimiento_id">
-                        {{ props.item.persona.departamento_nacimiento.nombre }}
+                        <span v-if="props.item.departamento_nacimiento_id">
+                        {{ props.item.departamento_nacimiento.nombre }}
                         </span>
                       </td>
                     </tr>
                     <tr>
                       <th class="text-xs-left">Provincia de nacimiento: </th>
                       <td class="text-xs-left">
-                        <span v-if="props.item.persona.provincia_nacimiento_id">
-                        {{ props.item.persona.provincia_nacimiento.nombre }}
+                        <span v-if="props.item.provincia_nacimiento_id">
+                        {{ props.item.provincia_nacimiento.nombre }}
                         </span>
                       </td>
                     </tr>                    
@@ -153,18 +138,18 @@ export default {
     bus: new Vue(),
     headers: [
       {
-        text: "Entidad de investigación",
+        text: "Nombre del beneficiario",
         value: "nombre",
         align: "center"
       },
       {
-        text: "Direccion",
-        value: "direccion",
+        text: "Carnet de identidad",
+        value: "carnet_identidad",
         align: "center"
       },      
       {
-        text: "Telefono",
-        align: "center",
+        text: "Estado Civil",
+        align: "estado_civil",
         sortable: false,
       },
       {
@@ -187,18 +172,15 @@ export default {
   methods: {
     async getTable() {
       try {
-        let res = await axios.get("api/entidad_investigacion")
+        let res = await axios.get("api/persona/fill/"+JSON.stringify({tipo_persona_id: 7}))
         this.table = res.data
         console.log(res.data)
       } catch (e) {
         console.log(e)
       }
     },
-    cardItem(item) {
-      this.bus.$emit("openDialogCard", item);
-    }, 
-    editItem(item, mode) {
-      this.bus.$emit("openDialog", Object.assign(item, mode));
+    editItem(item) {
+      this.bus.$emit("openDialog", item);
     },    
     async removeItem(item) {
       let res = await axios.get("api/guia_internacion/fill/" + JSON.stringify({persona_id: item.id}));

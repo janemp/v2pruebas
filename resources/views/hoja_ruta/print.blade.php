@@ -165,7 +165,7 @@
                             @if(!is_null($hoja_ruta->vehiculo_id))
                                 <i>{{ $hoja_ruta->vehiculo->nombre }}</i>
                             @else
-                                <i> </i>
+                                <i></i>
                             @endif
                         </td>
                         <td><b>Marca:</b> </td>
@@ -173,7 +173,7 @@
                             @if(!is_null($hoja_ruta->marca_id))
                                 <i>{{ $hoja_ruta->marca->nombre }}</i>
                             @else
-                                <i> </i>
+                                <i></i>
                             @endif
                         </td>
                     </tr>
@@ -186,7 +186,7 @@
                             @if(!is_null($hoja_ruta->numero_placa))
                                 <i>{{ $hoja_ruta->numero_placa }}</i>
                             @else
-                                <i> </i>
+                                <i></i>
                             @endif
                         </td>
                         <td class="text-left w-20 px-10 py-3 font-bold"><b>Color: </b> </td>
@@ -194,7 +194,7 @@
                             @if(!is_null($hoja_ruta->color))
                                 <i>{{ $hoja_ruta->color }}</i>
                             @else
-                                <i> </i>
+                                <i></i>
                             @endif
                         </td>
                     </tr>
@@ -207,7 +207,7 @@
                             @if(!is_null($hoja_ruta->nombre_conductor))
                                 <i>{{ $hoja_ruta->nombre_conductor }}</i>
                             @else
-                                <i> </i>
+                                <i></i>
                             @endif
                         </td>
                     </tr>                        

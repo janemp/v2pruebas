@@ -100,9 +100,9 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           if (this.selectedIndex != -1) {
-            await axios.put("api/zona_productiva/"+this.selectedItem.id, this.selectedItem)
+            await axios.put("api/zona_autorizada/"+this.selectedItem.id, this.selectedItem)
           } else {
-            await axios.post("api/zona_productiva", this.selectedItem)
+            await axios.post("api/zona_autorizada", this.selectedItem)
           }
           this.$toast.success('Correcto.')
           this.close();
@@ -113,7 +113,7 @@ export default {
     },
     async codevalidate(){
       var params = {'codigo': this.selectedItem.codigo}
-      let res = await axios.get('api/zona_productiva/show_fill/'+JSON.stringify(params))
+      let res = await axios.get('api/zona_autorizada/show_fill/'+JSON.stringify(params))
       if(res.data.length > 0){
         this.error = 'El codigo ya existe'
       }
