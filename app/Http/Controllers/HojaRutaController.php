@@ -114,7 +114,8 @@ class HojaRutaController extends Controller
         }
         $data = [
             'hoja_ruta' => $hoja_ruta
-        ];        
+        ];      
+        //dd($data);  
         return \PDF::loadView('hoja_ruta.print', $data)
         // ->setOption('header-html', $headerHtml)
         // ->setOption('footer-html', $footerHtml)

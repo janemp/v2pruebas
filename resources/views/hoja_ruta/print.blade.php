@@ -175,7 +175,6 @@
                             @else
                                 <i></i>
                             @endif
-                            
                         </td>
                     </tr>
                     <tr>
@@ -192,7 +191,7 @@
                         </td>
                         <td class="text-left w-20 px-10 py-3 font-bold"><b>Color: </b> </td>
                         <td class="text-left px-5 py-3">
-                            @if(!is_null($hoja_ruta->numero_placa))
+                            @if(!is_null($hoja_ruta->color))
                                 <i>{{ $hoja_ruta->color }}</i>
                             @else
                                 <i></i>
