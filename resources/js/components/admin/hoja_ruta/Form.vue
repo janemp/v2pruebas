@@ -242,7 +242,7 @@
         <v-btn v-if="step!=1" color="info" small @click.native="previousStep()">Anterior</v-btn>
         <v-btn color="info" small @click.native="nextStep()">Siguiente</v-btn>
         <v-btn color="error" small @click.native="close"><v-icon>close</v-icon> Cancelar</v-btn>
-        <v-btn v-if="step==3" color="success" small :disabled="!valid" @click="save()" ><v-icon>check</v-icon> Guardar</v-btn>
+        <v-btn v-if="step==3 || (direct==true && step==2)" color="success" small :disabled="!valid" @click="save()" ><v-icon>check</v-icon> Guardar</v-btn>
         
       </v-card-actions>
     </v-card>
@@ -309,7 +309,8 @@ export default {
       puestos_de_control:[],
       permanencia: [],
       error: '',
-      puestos_venta: []
+      puestos_venta: [],
+      direct: false
     };
   },
   created() {
@@ -359,6 +360,7 @@ export default {
       this.selectedIndex = -1
       this.selectedItem = {}      
       this.step = 1
+      this.direct = false
       this.$refs.form1.reset()
       this.$refs.form2.reset()      
       this.bus.$emit("closeDialog")
@@ -382,7 +384,6 @@ export default {
     },
     async getComercializadores() {
       let res = await axios.get("api/persona/hoja_ruta");
-      console.log(res.data)
       this.temp = res.data
       for(var temp of this.temp){
         if(temp.poder.length == 0){
@@ -392,8 +393,17 @@ export default {
     },
     async getComercializador() {
       let res = await axios.get("api/persona/fill/"+JSON.stringify({'id': this.selectedItem.persona_id}))
-      console.log(res.data)
       this.comercializador = res.data[0]
+      let hoja = await axios.get("api/hoja_ruta/fill/"+JSON.stringify({'persona_id': res.data[0].id}))
+      if(hoja.data.length > 0){
+        this.direct = true
+        hoja.data[0].taques = null
+        var fecha = new Date()
+        this.begin_date_formatted = this.$moment(fecha).format("DD/MM/YYYY")
+        this.end_date_formatted = this.$moment(fecha).format("DD/MM/YYYY")
+        this.selectedItem = hoja.data[0];
+      }
+
     },
     async getVehiculos() {
       let res = await axios.get("api/vehiculo")

@@ -87,7 +87,7 @@ class HojaRutaController extends Controller
     {
         $request = json_decode($request, true);
         return HojaRuta::with('localidad', 'persona.departamento_extension', 'vehiculo', 'marca', 'procedencia', 'destino', 'ruta.puestos_de_control','retencion', 'puesto_venta')
-            ->where($request)->get();
+            ->where($request)->orderBy('created_at', 'DESC')->get();
     }
 
     public function max($campo) 

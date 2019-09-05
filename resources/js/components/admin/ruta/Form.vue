@@ -53,6 +53,7 @@
                   type="number"
                   :rules="[v => !!v || 'Requerido', v => /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}/.test(v) || 'latitud incorrecta']"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
+                  disabled
                 ></v-text-field>
                 <v-text-field
                   v-model="selectedItem.origenln"
@@ -60,6 +61,7 @@
                   type="number"
                   :rules="[v => !!v || 'Requerido', v => /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}/.test(v) || 'latitud incorrecta']"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
+                  disabled
                 ></v-text-field>
                 <v-text-field
                   v-model="selectedItem.destinola"
@@ -67,6 +69,7 @@
                   type="number"
                   :rules="[v => !!v || 'Requerido', v => /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}/.test(v) || 'latitud incorrecta']"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
+                  disabled
                 ></v-text-field>
                 <v-text-field
                   v-model="selectedItem.destinoln"
@@ -74,6 +77,7 @@
                   type="number"
                   :rules="[v => !!v || 'Requerido', v => /^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}/.test(v) || 'latitud incorrecta']"
                   hint="<span class='blue--text'>*Requerido</span>" persistent-hint
+                  disabled
                 ></v-text-field>              
               </v-card-text>
             </v-flex>
