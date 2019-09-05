@@ -83,7 +83,7 @@ Route::group(['middleware' => ['jwt']], function() {
 
         Route::get('hoja_ruta/max/{param}', 'HojaRutaController@max')->middleware('permission:listar');
         Route::get('hoja_ruta/fill/{param}', 'HojaRutaController@fill')->middleware('permission:listar');
-        Route::get('hoja_ruta/print/{id}', 'HojaRutaController@print')->middleware(['permission:imprimir', 'role:admin']);
+        Route::get('hoja_ruta/print/{id}', 'HojaRutaController@print')->middleware('permission:imprimir');
         Route::get('hoja_ruta', 'HojaRutaController@index')->middleware('permission:listar');
         Route::post('hoja_ruta', 'HojaRutaController@store')->middleware('permission:registrar');
         Route::put('hoja_ruta/{id}', 'HojaRutaController@update')->middleware('permission:editar');
