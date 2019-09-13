@@ -403,6 +403,9 @@ export default {
         this.end_date_formatted = this.$moment(fecha).format("DD/MM/YYYY")
         this.selectedItem = hoja.data[0];
       }
+      else{
+        this.$refs.form2.reset()
+      }
 
     },
     async getVehiculos() {
