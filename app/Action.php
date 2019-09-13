@@ -10,7 +10,7 @@ class Action extends Model
 	public $timestamps = true;
 	public $guarded = ['id'];
 
-	protected $fillable = ['user_id', 'method', 'path', 'data'];
+	protected $fillable = ['user_id', 'method', 'path', 'data', 'ip_address'];
 
 	public function user() 
 	{

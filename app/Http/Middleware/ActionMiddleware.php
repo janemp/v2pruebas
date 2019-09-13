@@ -40,7 +40,7 @@ class ActionMiddleware
 			$action->path = $request->path();
 			$action->method = $request->method();
 			$action->data = json_encode($action->data);
-
+			$action->ip_address = $request->ip();
 			$action->save();
 		}
 
