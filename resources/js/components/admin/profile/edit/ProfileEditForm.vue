@@ -107,7 +107,8 @@
           axios.put(api.path('profile'), this.form)
             .then(res => {
               this.$toast.success('Your profile successfully updated.')
-              this.$emit('success', res.data)
+              this.logout()
+              //this.$emit('success', res.data)
             })
             .catch(err => {
               this.handleErrors(err.response.data.errors)
@@ -116,7 +117,13 @@
               this.loading = false
             })
         }
-      }
+      },
+      async logout() {
+        await this.$store.dispatch('auth/logout')
+
+        this.$toast.info('sessión terminada.')
+        this.$router.push({ name: 'login' })
+      },
     }
   }
 </script>
