@@ -1,4 +1,4 @@
-u<?php
+<?php
 
 use Illuminate\Database\Seeder;
 use App\ZonaAutorizada;

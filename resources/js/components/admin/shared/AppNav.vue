@@ -143,15 +143,6 @@
                   
                 ]
               }
-            ],            
-            [
-              { 
-                title: 'Modulo de Gestión de Actividades de Producción', 
-                icon: 'list',
-                items: [
-                  { title: 'Registro de las Características de la Producción de Coca', icon: 'forward', to: {name: 'caracteristica_produccion'}, exact: false},
-                ]
-              }
             ],
             [
               { 
