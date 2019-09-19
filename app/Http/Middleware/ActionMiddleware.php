@@ -26,6 +26,9 @@ class ActionMiddleware
 			if (array_key_exists('password', $data)) {
 				unset($data['password']);
 			}
+			if (array_key_exists('password_confirmation', $data)) {
+				unset($data['password_confirmation']);
+			}
 			if (is_array($data) && count($data) == 0) {
 				$data = null;
 			}

@@ -32,7 +32,7 @@
                   >
                 </v-autocomplete>
               </v-form>
-              <v-card flat color="blue-grey lighten-5" v-if="comercializador">
+              <v-card flat color="blue-grey lighten-5" v-if="comercializador !=  null">
                 <v-card-text >
                   <v-layout row wrap>
                     <v-flex xs3>
@@ -177,7 +177,7 @@
                   label="Vehículos"
                   >
                 </v-autocomplete>
-                <v-autocomplete                      
+                <v-autocomplete
                   v-model="selectedItem.marca_id"
                   :items="marcas"
                   item-text="nombre"
