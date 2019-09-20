@@ -83,6 +83,7 @@ export default {
           this.selectedItem.destinoln = parseFloat(this.markersTemp[this.markersTemp.length - 1].position.lng);
           this.selectedItem.destino_id = this.markersTemp[this.markersTemp.length - 1].id;
           this.selectedItem.puestos_de_control.push(elem.id);
+          this.map.setView([elem.latitud, elem.longitud], 8);
         }
         marker.addTo(this.layerGroup);
       });
@@ -120,12 +121,7 @@ export default {
     },
     setMarkers(markers) {
       for(var i = 0; i < markers.length; i++){
-        const createdMarker = this.addMarker();
-        createdMarker.position.lat = parseFloat(markers[i].latitud);
-        createdMarker.position.lng = parseFloat(markers[i].longitud);
-        createdMarker.text = markers[i].nombre;
-        createdMarker.id = markers[i].id;
-        var marker = L.marker([createdMarker.position.lat, createdMarker.position.lng],
+        var marker = L.marker([markers[i].latitud, markers[i].longitud],
           {MyCustomId: markers[i].id})
         .bindPopup(markers[i].nombre)
         .on('click',(e)=>{
