@@ -3,32 +3,15 @@
        
   <v-card>
       <v-toolbar dark color="primary">
-        <v-toolbar-title class="white--text">Sanciones</v-toolbar-title>                 
-        <v-spacer></v-spacer>   
-       
+        <v-toolbar-title class="white--text">Infracciones</v-toolbar-title>                 
+        <v-spacer></v-spacer>          
         <v-divider
           class="mx-2"
           inset
           vertical
-        ></v-divider>   
-       
-        <Form :bus="bus"/>
-        <RemoveItem :bus="bus"/>  
-         <v-toolbar-title>
-          <!-- <v-tooltip slot="activator" top @click="formItem()">
-          <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
-          <span>Registrar Cumplimiento</span>
-        </v-tooltip>  -->
-        <v-tooltip top>
-                <v-btn slot="activator" flat icon color="indigo" @click="formItem(idpersona, {mode: 'Nuevo'})">                  
-                  <v-icon>add_circle</v-icon>
-                </v-btn>
-                <span>Registrar Cumplimiento</span>
-              </v-tooltip>
-        </v-toolbar-title>
-
-         
+        ></v-divider>               
       </v-toolbar>
+
       <v-card-text>
         <v-data-table
           :headers="headers"
@@ -47,35 +30,7 @@
             <td class="text-xs-center" @click="props.expanded = !props.expanded">
               <v-chip color="default" text-color="white" v-if="props.item.estado==0">No cumplido </v-chip>
               <v-chip color="success" text-color="white" v-if="props.item.estado==1">Cumplido</v-chip>
-            </td> 
-
-            <!-- <td class="text-xs-center">
-              <v-tooltip top v-if="props.item.bloqueante==null">
-                <v-switch
-                  slot="activator"
-                  v-model="props.item.bloqueante"
-                  color="success"
-                  @change="activeItem(props.item)"
-                  class="mt-2"
-                ></v-switch>
-                <span>{{ (props.item.bloqueante)? 'Activo':'Inactivo' }}</span>
-              </v-tooltip>
-            </td> -->
-            
-            <td class="justify-center layout">  
-              <v-tooltip top>
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item, {mode: 'Editar'})">                  
-                  <v-icon>edit</v-icon>
-                </v-btn>
-                <span>Editar</span>
-              </v-tooltip>
-              <v-tooltip top>
-                <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)">
-                  <v-icon>delete</v-icon>
-                </v-btn>
-                <span>Eliminar</span>
-              </v-tooltip>
-            </td>
+            </td>            
           </tr>         
           </template>  
           <template v-slot:expand="props">
@@ -144,7 +99,7 @@ export default {
           align: "center"
         },
         {
-          text: "Nombre",
+          text: "Nombre Sanción",
           value: "nombre",
           align: "center"
         },
@@ -167,12 +122,7 @@ export default {
         //   text: "Activo",
         //   value: "bloqueante",
         //   align: "center"
-        // },
-        {
-          text: "Opciones",
-          align: "center",
-          sortable: false
-        }
+        // },    
       ],
       table: [],
       search: "",
@@ -192,10 +142,6 @@ export default {
       this.bus.$on("closeDialogForm", () => {
       this.getTable()
     }); 
-
-    this.bus.$on("closeDialog", () => {
-      this.getTable()
-    }); 
   },
   methods: {
      close() {
@@ -206,7 +152,8 @@ export default {
       this.bus.$emit("closeDialog",this.selecteditem)
     },
     async getTable() {
-      try {        
+      try {
+        
         //let res = await axios.get("api/sancion/fill/" + JSON.stringify({'persona_id': this.selectedItem.idpersona}))
 
         let res = await axios.get("api/sancion/showfill/" + this.selectedItem.id)
@@ -215,31 +162,6 @@ export default {
         console.log(e);
       }    
     },
-
-    formItem(item, mode) {
-      this.bus.$emit("openDialogForm1", Object.assign(item, mode));
-    },
-
-    editItem(item, mode) {
-      this.bus.$emit("openDialogForm", Object.assign(item, mode));
-    },
-
-    async removeItem(item) {
-      //this.bus.$emit("openDialogRemove", `api/sancion/${this.selectedItem.id}`); 
-       this.bus.$emit("openDialogRemove", `api/sancion/${item.id}`); 
-      this.getTable()
-
-    }, 
-   
-    // activeItem(item){
-    //   if (item.bloqueante) {
-    //     this.bus.$emit("openDialogConfirm", {action: "Activar", url: "api/sancion/"+ item.id, item: {bloqueante: true}});
-    //   } else {
-    //     this.bus.$emit("openDialogConfirm", {action: "Inactivar", url: "api/sancion/"+ item.id, item: {bloqueante: false}});
-    //   }
-   //},
-
-    
   }
 };
 </script>

@@ -61,6 +61,8 @@ export default [
         { path: 'resoluciones_administrativas', name: 'resolucion_administrativa', component: require('$comp/admin/resolucion_administrativa/Index'), meta: {rule: 'digcoin'} },
         { path: 'consulta_res_administrativa', name: 'consulta_res_administrativa', component: require('$comp/admin/consulta_res_administrativa/Index'), meta: {rule: 'digcoin'} },
         { path: 'sanciones_monetarias', name: 'sanciones_monetarias', component: require('$comp/admin/sanciones_monetarias/Index'), meta: {rule: 'digcoin'} },
+        { path: 'consulta_infracciones_san', name: 'consulta_infracciones_san', component: require('$comp/admin/consulta_infracciones_san/Index'), meta: {rule: 'digcoin'} },
+        
         
         /* 7 Modulo de reportes */
         

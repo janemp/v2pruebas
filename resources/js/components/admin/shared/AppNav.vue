@@ -195,6 +195,8 @@
                   { title: 'Resoluciones administrativas', icon: 'forward', to: {name: 'resolucion_administrativa'}, exact: false},
                   { title: 'Consulta de resoluciones administrativas', icon: 'forward', to: {name: 'consulta_res_administrativa'}, exact: false},
                   { title: 'Registro de cumplimiento de sanciones monetarias', icon: 'forward', to: {name: 'sanciones_monetarias'}, exact: false},
+                  { title: 'Consulta de infracciones y sanciones', icon: 'forward', to: {name: 'consulta_infracciones_san'}, exact: false},
+                
                 ]
               }
             ],

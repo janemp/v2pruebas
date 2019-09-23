@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ComercializadorInfraccion;
+use App\Persona;
 use Illuminate\Http\Request;
 
 class ComercializadorInfraccionController extends Controller
@@ -13,7 +15,7 @@ class ComercializadorInfraccionController extends Controller
      */
     public function index()
     {
-        return ComercialzadorInfraccion::with('comercializador_id','infraccion_id')->get();
+        return ComercialzadorInfraccion::with('persona_id','sancion_id')->get();
     }
 
     /**
@@ -69,6 +71,7 @@ class ComercializadorInfraccionController extends Controller
     public function fill($request) 
     {
         $request = json_decode($request, true);
-        return ComercializadorInfraccion::with('persona', 'persona.departamento_extension', 'persona.pais_nacimiento', 'persona.departamento', 'persona.provincia')->where($request)->get();
+        return ComercializadorInfraccion::with('persona', 'persona.id', 'persona_id')
+            ->where($request)->orderBy('id', 'DESC')->get();
     }
 }
