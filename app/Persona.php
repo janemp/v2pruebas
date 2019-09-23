@@ -92,4 +92,8 @@ class Persona extends Model
     public function puestos_venta(){
         return $this->belongsToMany(PuestoVenta::class);
     }
+
+    public function parcelas(){
+        return $this->ManytoMany(Parcela::class);
+    }
 }
