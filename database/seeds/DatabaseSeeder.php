@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PuestosSeeder::class);
         $this->call(MotivosIncineracionSeeder::class);
         $this->call(TiposResolucionSeeder::class);
-        $this->call(TiposInfraccionSeeder::class);
+        $this->call(InfraccionesSeeder::class);
         $this->call(TiposSancionSeeder::class);
         $this->call(FirmaSeeder::class);
         // $this->call(RolesSeeder::class);

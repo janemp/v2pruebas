@@ -23,6 +23,7 @@ class CreateSancionsTable extends Migration
             $table->decimal('monto');
             $table->boolean('bloqueante')->default(false);
             $table->string('estado',1);
+            $table->string('adjunto')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

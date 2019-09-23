@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-toolbar>
-        <v-toolbar-title>Registro de Cumplimiento de Sanciones Monetarias</v-toolbar-title>
+        <v-toolbar-title>Consulta de Infracciones y Sanciones</v-toolbar-title>
         <v-spacer></v-spacer>   
         <v-divider
           class="mx-2"
@@ -23,7 +23,7 @@
           inset
           vertical
         ></v-divider>
-        <Sanciones :bus="bus"/>
+        <Form :bus="bus"/>
     </v-toolbar>
     <v-data-table
         :headers="headers"
@@ -42,7 +42,7 @@
                 <v-btn slot="activator" flat icon color="indigo" @click="sancionItem(props.item)">
                   <v-icon>assignment</v-icon>
                 </v-btn>
-                <span>Sanciones Monetarias</span>
+                <span>Ver Infracciones y Sanciones</span>
               </v-tooltip>
             </td>
           </tr>
@@ -123,11 +123,11 @@
 <script type="text/javascript">
 import Vue from "vue";
 import axios from 'axios'
-import Sanciones from "./Sanciones"
+import Form from "./Form"
 
 export default {
   components: {
-    Sanciones,
+    Form,
   },
   data: () => ({
     bus: new Vue(),
