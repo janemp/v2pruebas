@@ -26,7 +26,7 @@
                 <span>Registrar Cumplimiento</span>
               </v-tooltip>
         </v-toolbar-title>
-        ></v-divider>
+       
       </v-toolbar>
       <v-card-text>
         <v-data-table
