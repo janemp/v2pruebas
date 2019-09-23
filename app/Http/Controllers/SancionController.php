@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Sancion;
+use App\Persona;
+use App\ComercializadorInfraccion;
 use Illuminate\Http\Request;
+use DB;
 
 class SancionController extends Controller
 {
@@ -25,7 +28,12 @@ class SancionController extends Controller
      */
     public function store(Request $request)
     {
-        return Sancion::create($request->all());
+        $idpersona = Persona::findOrFail($request->persona_id);
+        $sancion = Sancion::create($request->all());        
+        $evento = new ComercializadorInfraccion;
+        $evento->persona_id = $idpersona->id;
+        $evento->sancion_id = $sancion->id;
+        $evento->save();       
     }
 
     /**
@@ -52,7 +60,6 @@ class SancionController extends Controller
         $sancion = Sancion::findOrFail($id);
         $sancion->fill($request->all());
         $sancion->save();
-        return $sancion;
     }
 
     /**
@@ -62,10 +69,10 @@ class SancionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $sancion = Sancion::findOrFail($id);
+    {       
+        $sancion = Sancion::findOrFail($id);  
+        //$sancion->comercializador_infraccion()->detach();
         $sancion->delete();
-        return $sancion;
     }
 
     public function codevalidate($code){
@@ -76,5 +83,37 @@ class SancionController extends Controller
         else{
             return '';
         }
+    }
+
+    public function fill($request) 
+    { 
+        // $request = json_decode($request, true);
+        // return Sancion::with('infraccion.personas')->where($request)->get();
+
+        // $request = json_decode($request, true);
+        // return Sancion::where($request)->get();
+
+        $request = json_decode($request, true);
+        return Sancion::with('persona', 'persona.id', 'infraccion_id')
+            ->where($request)->orderBy('id', 'DESC')->get();
+    }
+
+    public function showfill($idPersona) 
+    {
+        // //$request = json_decode($request, true);
+        // return Sancion::join("infracciones","sanciones.infraccion_id","=","infracciones.id")
+        // ->join("comercializador_infraccions","comercializador_infraccions.infraccion_id","=","infracciones.id")
+        // ->join("personas","comercializador_infraccions.persona_id","=","personas.id")
+        // ->where('id', $idPersona)->orderBy('id', 'DESC')->get();
+
+
+        return  $results = DB::select('select distinct  sanciones.id, infracciones.nombre as nominfraccion,
+        sanciones.infraccion_id, sanciones.codigo, sanciones.nombre, 
+        sanciones.monto, sanciones.descripcion, sanciones.estado         
+        from sanciones 
+        inner join infracciones on sanciones.infraccion_id=infracciones.id 
+        inner join comercializador_infraccions on sanciones.id=comercializador_infraccions.sancion_id 
+        inner join personas on comercializador_infraccions.persona_id=personas.id
+        where sanciones.deleted_at is null and personas.id = ?', [$idPersona]);
     }
 }

@@ -18,7 +18,7 @@ class ComercializadorInfraccion extends Model
      * @var array
      */
     protected $fillable = [
-        'comercializador_id', 'infraccion_id',
+        'persona_id', 'sancion_id',
     ];
 
     
@@ -30,8 +30,8 @@ class ComercializadorInfraccion extends Model
         return $this->belongsTo(Persona::class);
     }
 
-    public function infraccion()
+    public function sancion()
     {
-        return $this->belongsTo(Infraccion::class);
+        return $this->belongsTo(Sancion::class);
     }
 }

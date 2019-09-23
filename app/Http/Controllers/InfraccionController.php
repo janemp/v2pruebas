@@ -25,7 +25,10 @@ class InfraccionController extends Controller
      */
     public function store(Request $request)
     {
-        return Infraccion::create($request->all());
+        return $infraccion = Infraccion::create($request->all());
+        // $infraccion->personas()->attach($request->comercializador_id);
+        // return $infraccion;
+
     }
 
     /**
@@ -77,4 +80,13 @@ class InfraccionController extends Controller
             return '';
         }
     }
+    public function fill($request) 
+    {
+        $request = json_decode($request, true);
+        // return Infraccion::with('comercializadorinfraccion', 'comercializadorinfraccion.infraccion_id', 'id')
+        //     ->where($request)->orderBy('id', 'DESC')->get();  
+        return Infraccion::with('comercializador_infraccions')->where($request)->get();
+
+    }
+   
 }
