@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersSeeder::class);
         $this->call(PaisesSeeder::class);
-        $this->call(ZonasProductivasSeeder::class);
+        $this->call(ZonasAutorizadasSeeder::class);
         $this->call(AllSeeder::class);
         $this->call(MercadosSeeder::class);
         $this->call(TiposPersonaSeeder::class);
@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TiposResolucionSeeder::class);
         $this->call(InfraccionesSeeder::class);
         $this->call(TiposSancionSeeder::class);
+        $this->call(FirmaSeeder::class);
         // $this->call(RolesSeeder::class);
         // $this->call(PermisosSeeder::class);
         // $this->call(LaratrustSeeder::class);        

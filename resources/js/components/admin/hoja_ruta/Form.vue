@@ -1,7 +1,7 @@
 <template>
   <v-dialog persistent v-model="dialog" max-width="900px" @keydown.esc="close">
     <v-tooltip slot="activator" top>
-      <v-icon large slot="activator" dark color="indigo" @click="getCorrelativo()">add_circle</v-icon>
+      <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
       <span>Nuevo</span>
     </v-tooltip>
     <v-card>
@@ -32,7 +32,7 @@
                   >
                 </v-autocomplete>
               </v-form>
-              <v-card flat color="blue-grey lighten-5" v-if="comercializador">
+              <v-card flat color="blue-grey lighten-5" v-if="comercializador !=  null">
                 <v-card-text >
                   <v-layout row wrap>
                     <v-flex xs3>
@@ -67,11 +67,6 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-form ref="form2" v-model="valid" lazy-validation>
-                <v-text-field
-                  v-model="selectedItem.correlativo"
-                  label="Correlativo hoja de ruta"
-                  disabled
-                ></v-text-field>
                 <v-text-field
                   v-model="selectedItem.codigo_comercializador"
                   label="Codigo de Comercializador"
@@ -182,7 +177,7 @@
                   label="Vehículos"
                   >
                 </v-autocomplete>
-                <v-autocomplete                      
+                <v-autocomplete
                   v-model="selectedItem.marca_id"
                   :items="marcas"
                   item-text="nombre"
@@ -247,7 +242,7 @@
         <v-btn v-if="step!=1" color="info" small @click.native="previousStep()">Anterior</v-btn>
         <v-btn color="info" small @click.native="nextStep()">Siguiente</v-btn>
         <v-btn color="error" small @click.native="close"><v-icon>close</v-icon> Cancelar</v-btn>
-        <v-btn v-if="step==3" color="success" small :disabled="!valid" @click="save()" ><v-icon>check</v-icon> Guardar</v-btn>
+        <v-btn v-if="step==3 || (direct==true && step==2)" color="success" small :disabled="!valid" @click="save()" ><v-icon>check</v-icon> Guardar</v-btn>
         
       </v-card-actions>
     </v-card>
@@ -314,7 +309,8 @@ export default {
       puestos_de_control:[],
       permanencia: [],
       error: '',
-      puestos_venta: []
+      puestos_venta: [],
+      direct: false
     };
   },
   created() {
@@ -364,6 +360,7 @@ export default {
       this.selectedIndex = -1
       this.selectedItem = {}      
       this.step = 1
+      this.direct = false
       this.$refs.form1.reset()
       this.$refs.form2.reset()      
       this.bus.$emit("closeDialog")
@@ -375,8 +372,8 @@ export default {
           if (this.selectedIndex != -1) {
             await axios.put("api/hoja_ruta/"+this.selectedItem.id, this.selectedItem)
           } else {
-            this.selectedItem.id_hoja_ruta = this.correlativo
-            await axios.post("api/hoja_ruta", this.selectedItem)
+            let res = await axios.post("api/hoja_ruta", this.selectedItem)
+            this.printItem(res.data)
           }
           this.$toast.success('Correcto.')
           this.close();
@@ -387,7 +384,6 @@ export default {
     },
     async getComercializadores() {
       let res = await axios.get("api/persona/hoja_ruta");
-      console.log(res.data)
       this.temp = res.data
       for(var temp of this.temp){
         if(temp.poder.length == 0){
@@ -397,8 +393,20 @@ export default {
     },
     async getComercializador() {
       let res = await axios.get("api/persona/fill/"+JSON.stringify({'id': this.selectedItem.persona_id}))
-      console.log(res.data)
       this.comercializador = res.data[0]
+      let hoja = await axios.get("api/hoja_ruta/fill/"+JSON.stringify({'persona_id': res.data[0].id}))
+      if(hoja.data.length > 0){
+        this.direct = true
+        hoja.data[0].taques = null
+        var fecha = new Date()
+        this.begin_date_formatted = this.$moment(fecha).format("DD/MM/YYYY")
+        this.end_date_formatted = this.$moment(fecha).format("DD/MM/YYYY")
+        this.selectedItem = hoja.data[0];
+      }
+      else{
+        this.$refs.form2.reset()
+      }
+
     },
     async getVehiculos() {
       let res = await axios.get("api/vehiculo")
@@ -451,6 +459,19 @@ export default {
     async getCorrelativo() {
       let res = await axios.get("api/hoja_ruta/max/correlativo")
       this.selectedItem.correlativo = res.data
+    },
+    async printItem(item) {
+      try {        
+        let res = await axios({
+          method: "GET",
+          url: "api/hoja_ruta/print/" + item.id,
+          responseType: "arraybuffer"
+        });
+        let blob = new Blob([res.data], {type: "application/pdf"});
+        printJS(window.URL.createObjectURL(blob));
+      } catch (e) {
+        console.log(e);
+      }
     },
     addMarker: function addMarker() {
       this.lastId++;

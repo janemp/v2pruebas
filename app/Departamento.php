@@ -17,7 +17,7 @@ class Departamento extends Model
      * @var array
      */
     protected $fillable = [
-        'zona_productiva_id', 'codigo', 'nombre', 'descripcion', 'sigla'
+        'zona_autorizada_id', 'codigo', 'nombre', 'descripcion', 'sigla'
     ];
 
     public function provincias() 
@@ -25,8 +25,8 @@ class Departamento extends Model
         return $this->hasMany(Provincia::class);
     }
 
-    public function zona_productiva(){
-        return $this->belongsTo(ZonaProductiva::class);
+    public function zona_autorizada(){
+        return $this->belongsTo(ZonaAutorizada::class);
     }
 
     public function mercados(){

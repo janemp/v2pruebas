@@ -40,7 +40,7 @@
             <td class="text-xs-center"> {{ props.item.name }} </td>
             <td class="text-xs-center"> {{ props.item.last_name }} </td>
             <td class="text-xs-center"> {{ props.item.mothers_last_name }} </td>
-            <td class="text-xs-center"> {{ props.item.created_at | moment("DD/MM  /YYYY") }} </td>
+            <td class="text-xs-center"> {{ props.item.created_at | moment("DD/MM/YYYY") }} </td>
             <td class="justify-center layout">              
               <v-tooltip top>
                 <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">

@@ -200,7 +200,7 @@ export default {
       this.bus.$emit("openDialog", Object.assign(item, mode));
     },
     async removeItem(item) {
-      this.bus.$emit("openDialogRemove", `api/puesto_venta/${item.id}`);      
+      this.bus.$emit("openDialogRemove", `api/persona_puesto_venta/${item.id}`);      
     },
     fullName(item) {
       return [item.nombre, item.primer_apellido, item.segundo_apellido].join(" ")

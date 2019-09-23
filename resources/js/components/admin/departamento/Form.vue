@@ -120,7 +120,7 @@ export default {
       }
     },
     async getZonasProductivas() {
-      let res = await axios.get("api/zona_productiva")
+      let res = await axios.get("api/zona_autorizada")
       this.zonas_productivas = res.data
     },
   },  

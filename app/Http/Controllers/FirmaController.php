@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Firma;
 use Illuminate\Http\Request;
-use App\ZonaProductiva;
 
-class ZonaProductivaController extends Controller
+class FirmaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ZonaProductivaController extends Controller
      */
     public function index()
     {
-        return ZonaProductiva::get();
+        return Firma::get();
     }
 
     /**
@@ -25,7 +25,7 @@ class ZonaProductivaController extends Controller
      */
     public function store(Request $request)
     {
-        return ZonaProductiva::create($request->all());
+        return Firma::create($request->all());
     }
 
     /**
@@ -36,7 +36,7 @@ class ZonaProductivaController extends Controller
      */
     public function show($id)
     {
-        return ZonaProductiva::findOrFail($id);
+        return Firma::findOrFail($id);
     }
 
     /**
@@ -48,10 +48,10 @@ class ZonaProductivaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $zona = ZonaProductiva::findOrFail($id);
-        $zona->fill($request->all());
-        $zona->save();
-        return $zona;
+        $firma = Firma::findOrFail($id);
+        $firma->fill($request->all());
+        $firma->save();
+        return $firma;
     }
 
     /**
@@ -62,14 +62,15 @@ class ZonaProductivaController extends Controller
      */
     public function destroy($id)
     {
-        $zona = ZonaProductiva::findOrFail($id);
-        $zona->delete();
-        return $zona;
+        $firma = Firma::findOrFail($id);
+        $firma->delete();
+        return $firma;
     }
-
-    public function fill($request) 
+    public function fill()
     {
         $request = json_decode($request, true);
-        return ZonaProductiva::where($request)->get();
+        return Firma::where($request)
+            ->orderBy('created_at', 'DESC')
+            ->get();
     }
 }

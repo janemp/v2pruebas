@@ -29,7 +29,13 @@ class HojaRutaController extends Controller
      */
     public function store(Request $request)
     {
-        // return HojaRuta::create($request->all());
+        $correlativo = 1;        
+        $data = HojaRuta::where('correlativo', HojaRuta::max('correlativo'))->first();
+        if ($data) {
+            $correlativo = explode('/', $data->correlativo)[0] + 1;
+            
+        }
+        $request['correlativo'] = $correlativo.'/'.\Carbon::now()->year;
         $request->control = true;
         $hoja_ruta = HojaRuta::create($request->all());
         return ControlHojaRuta::create([
@@ -81,7 +87,7 @@ class HojaRutaController extends Controller
     {
         $request = json_decode($request, true);
         return HojaRuta::with('localidad', 'persona.departamento_extension', 'vehiculo', 'marca', 'procedencia', 'destino', 'ruta.puestos_de_control','retencion', 'puesto_venta')
-            ->where($request)->get();
+            ->where($request)->orderBy('created_at', 'DESC')->get();
     }
 
     public function max($campo) 
@@ -108,7 +114,8 @@ class HojaRutaController extends Controller
         }
         $data = [
             'hoja_ruta' => $hoja_ruta
-        ];        
+        ];      
+        //dd($data);  
         return \PDF::loadView('hoja_ruta.print', $data)
         // ->setOption('header-html', $headerHtml)
         // ->setOption('footer-html', $footerHtml)
