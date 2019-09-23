@@ -21,11 +21,12 @@ class CreateParcelasTable extends Migration
             $table->foreign('comunidad_id')->references('id')->on('comunidades');
             $table->string('latitud');
             $table->string('longitud');
-            $table->string('descripcion');
+            $table->string('descripcion', 500);
             $table->double('hectareas');
             $table->integer('motivo_actualizacion_id')->unsigned();
             $table->foreign('motivo_actualizacion_id')->references('id')->on('motivos_actualizacion');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -37,6 +37,9 @@ export default [
         
 
         /* 3 Modulo de actividades de produccion */
+
+        { path: 'caracteristicas_produccion', name: 'caracteristica_produccion', component: require('$comp/admin/caracteristica_produccion/Index'), meta: {rule: 'digcoin'} },
+
         /* 4 Modulo de actividades de comercializacion*/
 
         { path: 'guias_internacion', name: 'guia_internacion', component: require('$comp/admin/guia_internacion/Index'), meta: {rule: 'digcoin'} },
