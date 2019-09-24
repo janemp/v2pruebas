@@ -8,9 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Parcela extends Model
 {
     use SoftDeletes;
-    public $fillable = ['fecha_parcela', 'codigo', 'comunidad_id', 'latitud', 'longitud', 'descripcion', 'hectareas', 'motivo_actualizacion_id'];
+    public $fillable = ['fecha_parcela', 'codigo_catastral', 'comunidad_id', 'latitud', 'longitud', 'descripcion', 'hectareas', 'motivo_actualizacion_id', 'region_id', 'user_id'];
 
     public function personas(){
-        return $this->ManytoMany(Persona::class);
+        return $this->belongsToMany(Persona::class, 'persona_parcela');
+    }
+
+    public function comunidad(){
+        return $this->belongsTo(Comunidad::class);
+    }
+
+    public function motivo_actualizacion(){
+        return $this->belongsTo(MotivoActualizacion::class);
+    }
+
+    public function region(){
+        return $this->belongsTo(Regional::class);
     }
 }

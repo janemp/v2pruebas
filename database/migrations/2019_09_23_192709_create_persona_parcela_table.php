@@ -20,6 +20,7 @@ class CreatePersonaParcelaTable extends Migration
             $table->integer('parcela_id')->unsigned();
             $table->foreign('parcela_id')->references('id')->on('parcelas');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -251,6 +251,12 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::put('comercializador_infraccion/{id}', 'ComercializadorInfraccionController@update')->middleware('permission:editar');
         Route::delete('comercializador_infraccion/{sancion_id}', 'ComercializadorInfraccionController@destroy')->middleware('permission:eliminar');
 
+        Route::get('parcela/fill/{param}', 'ParcelaController@fill');
+        Route::get('parcela', 'ParcelaController@index')->middleware('permission:listar');
+        Route::post('parcela', 'ParcelaController@store')->middleware('permission:registrar');
+        Route::put('parcela/{id}', 'ParcelaController@update')->middleware('permission:editar');
+        Route::delete('parcela/{id}', 'ParcelaController@destroy')->middleware('permission:eliminar');
+
 
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {

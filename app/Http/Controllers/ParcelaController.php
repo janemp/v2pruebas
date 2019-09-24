@@ -14,7 +14,7 @@ class ParcelaController extends Controller
      */
     public function index()
     {
-        return Parcela::with('personas')->get();
+        return Parcela::with('personas', 'comunidad', 'region')->get();
     }
 
     /**
@@ -38,7 +38,7 @@ class ParcelaController extends Controller
      */
     public function show($id)
     {
-        return Parcela::findOrFail($id);
+        return Parcela::with('personas', 'comunidad', 'region')->findOrFail($id);
     }
 
     /**
@@ -72,6 +72,6 @@ class ParcelaController extends Controller
     public function fill($request) 
     {
         $request = json_decode($request, true);
-        return Parcela::with('personas')->where($request)->get();
+        return Parcela::with('personas', 'comunidad', 'region')->where($request)->get();
     }
 }

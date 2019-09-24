@@ -16,7 +16,7 @@ class CreateParcelasTable extends Migration
         Schema::create('parcelas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fecha_parcela');
-            $table->string('codigo');
+            //$table->string('codigo');
             $table->integer('comunidad_id')->unsigned();
             $table->foreign('comunidad_id')->references('id')->on('comunidades');
             $table->string('latitud');
@@ -25,11 +25,11 @@ class CreateParcelasTable extends Migration
             $table->double('hectareas');
             $table->integer('motivo_actualizacion_id')->unsigned()->nullable();
             $table->foreign('motivo_actualizacion_id')->references('id')->on('motivos_actualizacion');
-            $table->integer('zona_racionalizada_id')->unsigned();
-            $table->foreign('zona_racionalizada_id')->references('id')->on('zona_racionalizadas');
             $table->string('codigo_catastral');
             $table->integer('region_id')->unsigned();
             $table->foreign('region_id')->references('id')->on('regionales');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });
