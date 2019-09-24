@@ -150,6 +150,7 @@
                 icon: 'list',
                 items: [
                   { title: 'Registro de las Características de la Producción de Coca', icon: 'forward', to: {name: 'caracteristica_produccion'}, exact: false},
+                  { title: 'Registro de Autorización de Renovaciones de Parcelas de Coca y Actualización de Registro', icon: 'forward', to: {name: 'autorizacion_renov_parcela'}, exact: false},
                 ]
               }
             ],

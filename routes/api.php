@@ -251,6 +251,12 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::put('comercializador_infraccion/{id}', 'ComercializadorInfraccionController@update')->middleware('permission:editar');
         Route::delete('comercializador_infraccion/{sancion_id}', 'ComercializadorInfraccionController@destroy')->middleware('permission:eliminar');
 
+        Route::get('motivoactualizacion/fill/{params}', 'MotivoActualizacionController@fill')->middleware('permission:listar');
+        Route::get('motivoactualizacion', 'MotivoActualizacionController@index')->middleware('permission:listar');
+        Route::post('motivoactualizacion', 'MotivoActualizacionController@store')->middleware('permission:registrar');
+        Route::put('motivoactualizacion/{id}', 'MotivoActualizacionController@update')->middleware('permission:editar');
+        Route::delete('motivoactualizacion/{id}', 'MotivoActualizacionController@destroy')->middleware('permission:eliminar');
+
 
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {

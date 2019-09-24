@@ -25,8 +25,8 @@ class CreateParcelasTable extends Migration
             $table->double('hectareas');
             $table->integer('motivo_actualizacion_id')->unsigned()->nullable();
             $table->foreign('motivo_actualizacion_id')->references('id')->on('motivos_actualizacion');
-            $table->integer('zona_racionalizada_id')->unsigned();
-            $table->foreign('zona_racionalizada_id')->references('id')->on('zona_racionalizadas');
+            // $table->integer('zona_racionalizada_id')->unsigned();
+            // $table->foreign('zona_racionalizada_id')->references('id')->on('zona_racionalizadas');
             $table->string('codigo_catastral');
             $table->integer('region_id')->unsigned();
             $table->foreign('region_id')->references('id')->on('regionales');

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InfraccionesSeeder::class);
         $this->call(TiposSancionSeeder::class);
         $this->call(FirmaSeeder::class);
+        $this->call(MotivosActualizacionSeeder::class);
         // $this->call(RolesSeeder::class);
         // $this->call(PermisosSeeder::class);
         // $this->call(LaratrustSeeder::class);        

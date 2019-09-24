@@ -23,10 +23,7 @@
           inset
           vertical
         ></v-divider>
-        <ConfirmItem :bus="bus"/>
-        <RemoveItem :bus="bus"/>
         <Form :bus="bus"/>
-        <Card :bus="bus"/>
     </v-toolbar>
     <v-data-table
         :headers="headers"
@@ -39,24 +36,18 @@
           <tr>
             <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ fullName(props.item) }} </td>
             <td class="text-xs-center" @click="props.expanded = !props.expanded"> {{ props.item.carnet_identidad + ' ' + props.item.departamento_extension.sigla }} </td>
-            <td class="justify-center layout">
-              <v-tooltip top v-if="props.item.sustitucion_id==null">
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item, {sustituir: true})">
-                  <v-icon>person_add</v-icon>
+             <td class="justify-center layout">
+              <v-tooltip top>
+                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
+                  <v-icon>credit_card</v-icon>
                 </v-btn>
-                <span>Sustituir</span>
+                <span>Registro de Renovación</span>
               </v-tooltip>
-              <v-tooltip top v-if="props.item.sustitucion_id==null">
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item, {sustituir: false})">
-                  <v-icon>edit</v-icon>
+              <v-tooltip top>
+                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
+                  <v-icon>assignment</v-icon>
                 </v-btn>
-                <span>Editar</span>
-              </v-tooltip>
-              <v-tooltip top v-if="$acl.check('admin') && props.item.sustitucion_id==null && props.item.cesaciones.length==0">
-                <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)" >
-                  <v-icon>delete</v-icon>
-                </v-btn>
-                <span>Eliminar</span>
+                <span>Verificación de Renovación</span>
               </v-tooltip>
             </td>
           </tr>
@@ -137,12 +128,10 @@
 <script type="text/javascript">
 import Vue from "vue";
 import axios from 'axios'
-import RemoveItem from "../RemoveItem";
 import Form from "./Form";
 
 export default {
   components: {
-    RemoveItem,
     Form
   },
   data: () => ({
@@ -186,16 +175,7 @@ export default {
     },
     editItem(item, mode) {
       this.bus.$emit("openDialog", Object.assign(item, mode));
-    }, 
-  
-    async removeItem(item) {
-      let res = await axios.get("api/guia_internacion/fill/" + JSON.stringify({persona_id: item.id}));
-      if(res.data.length > 0) {
-        this.$toast.info('Este productor tiene guía de internación.')
-      } else {
-        this.bus.$emit("openDialogRemove", `api/persona/${item.id}`);
-      }
-    },
+    },    
     fullName(item) {
       return [item.nombre, item.primer_apellido, item.segundo_apellido].join(" ")
     },
