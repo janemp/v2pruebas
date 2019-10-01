@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\PersonaPuestoVenta;
+use App\PuestoVenta;
 
 class PersonaPuestoVentaController extends Controller
 {
@@ -62,6 +63,8 @@ class PersonaPuestoVentaController extends Controller
      */
     public function destroy($id) {
         $data = PersonaPuestoVenta::findOrFail($id);
+        $puesto = PuestoVenta::findOrFail($data->puesto_venta->id);
+        $puesto->delete();
         $data->delete();
     }
 

@@ -18,10 +18,32 @@ class Sancion extends Model
      * @var array
      */
     protected $fillable = [
-        'infraccion_id', 'codigo', 'nombre', 'descripcion'
+        'infraccion_id', 'codigo', 'nombre', 'descripcion','monto','bloqueante','estado','adjunto'
     ];
 
-    public function infraccion(){
+    public function persona() 
+    {
+        return $this->hasMany(Persona::class);
+    }
+
+    public function infraccion()
+    {
         return $this->belongsTo(Infraccion::class);
     }
+
+    public function tipo_sancion() 
+    {
+        return $this->belongsTo(TipoSancion::class);
+    }   
+
+    public function comercializador_infraccion() 
+    {
+        return $this->belongsTo(ComercializadorInfraccion::class);
+    }  
+
+    public function comercializadorinfraccion()
+    {
+        return $this->belongsToMany(ComercializadorInfraccion::class, 'persona');
+    }
+  
 }

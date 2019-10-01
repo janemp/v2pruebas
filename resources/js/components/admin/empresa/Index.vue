@@ -91,11 +91,7 @@
                     <tr>
                       <th class="text-xs-left">CI: </th>
                       <td class="text-xs-left">{{ props.item.persona.carnet_identidad + ' ' + props.item.persona.departamento_extension.sigla }}</td>
-                    </tr>
-                    <tr>
-                      <th class="text-xs-left">CI: </th>
-                      <td class="text-xs-left">{{ props.item.persona.carnet_identidad + ' ' + props.item.persona.departamento_extension.sigla }}</td>
-                    </tr>
+                    </tr>                    
                     <tr>
                       <th class="text-xs-left">Estado civil: </th>
                       <td class="text-xs-left">{{ props.item.persona.estado_civil }}</td>

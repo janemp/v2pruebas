@@ -26,6 +26,9 @@ class ActionMiddleware
 			if (array_key_exists('password', $data)) {
 				unset($data['password']);
 			}
+			if (array_key_exists('password_confirmation', $data)) {
+				unset($data['password_confirmation']);
+			}
 			if (is_array($data) && count($data) == 0) {
 				$data = null;
 			}
@@ -40,7 +43,7 @@ class ActionMiddleware
 			$action->path = $request->path();
 			$action->method = $request->method();
 			$action->data = json_encode($action->data);
-
+			$action->ip_address = $request->ip();
 			$action->save();
 		}
 

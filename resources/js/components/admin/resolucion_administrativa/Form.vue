@@ -1,9 +1,5 @@
 <template>
   <v-dialog persistent v-model="dialog" max-width="900px" @keydown.esc="close">
-    <!-- <v-tooltip slot="activator" top>
-      <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
-      <span>Nuevo</span>
-    </v-tooltip> -->
     <v-card>
       <v-toolbar dark color="primary">
         <v-toolbar-title class="white--text">{{ formTitle }}</v-toolbar-title>
@@ -17,7 +13,8 @@
             @change="verificarResolucion()"
             :rules="[v => !!v || 'Requerido', v => (v && v.length <= 500) || 'No mayor a 500 caracteres']"
             hint="<span class='blue--text'>*Requerido</span>" persistent-hint                  
-          ></v-text-field>
+          ></v-text-field> 
+                   
           <v-menu
             v-model="menu"
             :close-on-content-click="false"
@@ -179,7 +176,6 @@ export default {
       this.fileAdjunto = null
       this.errorResolucion = null
       this.$refs.form.reset()
-      console.log(this.selectedItem)
       this.bus.$emit("closeDialogForm")
     },
     async save() {
@@ -202,7 +198,7 @@ export default {
     async verificarResolucion() {
       let res = await axios.get("api/resolucion_administrativa/fill/"+ JSON.stringify({'resolucion': this.selectedItem.resolucion}))
       if(res.data.length > 0) {
-        this.errorResolucion = "Ya existe esta resolución."
+        this.errorResolucion = null//"Ya existe esta resolución."
       } else {
         this.errorResolucion = null
       }
@@ -216,8 +212,7 @@ export default {
       this.fileAdjunto = xhr.response
       this.valArchivo = "Cargado correctamente."
     },
-    
-    
+      
     fullName(item) {
       return [item.nombre, item.primer_apellido, item.segundo_apellido].join(" ")
     },

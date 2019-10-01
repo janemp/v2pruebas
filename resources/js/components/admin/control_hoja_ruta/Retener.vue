@@ -6,18 +6,19 @@
       </v-toolbar>
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>      
-          <v-text-field
+          <!-- <v-text-field
             v-model="selectedItem.correlativo"
             label="Número"
             readonly
             box
-          ></v-text-field>
+          ></v-text-field> -->
           <v-autocomplete                      
-            v-model="selectedItem.causa_retencion_id"
+            v-model="selectedItem.causas"
             :items="causasRetencion"
             item-text="nombre"
             item-value="id"
             label="Causa de retención"
+            multiple small-chips
             :rules="[v => !!v || 'Requerido']"
             hint="<span class='blue--text'>*Requerido</span>" persistent-hint    
           ></v-autocomplete>
@@ -86,7 +87,7 @@
           <v-text-field
             v-model="selectedItem.libras"
             label="Libras"
-            :rules="[v => !!v || 'Requerido', v => (v && v <= 5000) || 'No mayor a 5000']"
+            :rules="[v => !!v || 'Requerido', v => (v && v <= 9999) || 'No mayor a 9999']"
             hint="<span class='blue--text'>*Requerido</span>" persistent-hint                  
           ></v-text-field>
           <v-layout row wrap>
@@ -170,7 +171,10 @@
               ></v-text-field>
             </v-flex>
           </v-layout>
-          <v-radio-group v-model="selectedItem.responsable" row>
+          <v-radio-group 
+            v-model="selectedItem.responsable" row 
+            :rules="[v => !!v || 'Requerido']"
+            hint="<span class='blue--text'>*Requerido</span>" persistent-hint>
             <v-radio label="GECC" value="GECC" color="green"></v-radio>
             <v-radio label="DIGCOIN" value="DIGCOIN" color="green"></v-radio>
           </v-radio-group>
@@ -200,7 +204,6 @@ export default {
       dialog: false,
       selectedIndex: -1,     
       selectedItem: {},
-
       causasRetencion: [],
       departamentos: [],
       provincias: [],
@@ -266,11 +269,7 @@ export default {
     },
     async getCorrelativo() {
       let res = await axios.get("api/retencion/max/correlativo")
-      if(res.data.lenth > 0){
-        this.selectedItem.correlativo = res.data + 1
-      } else {
-        this.selectedItem.correlativo = 1
-      }      
+      this.selectedItem.correlativo = res.data
     },
     async getCausasRetencion() {
       let res = await axios.get("api/causa_retencion")

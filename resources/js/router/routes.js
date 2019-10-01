@@ -32,11 +32,16 @@ export default [
         { path: 'empresas', name: 'empresa', component: require('$comp/admin/empresa/Index'), meta: {rule: 'digcoin'} },
         { path: 'entidad-de-investigacion', name: 'entidad_investigacion', component: require('$comp/admin/entidad_investigacion/Index'), meta: {rule: 'digcoin'} },
         { path: 'beneficiarios-de-donaciones', name: 'beneficiario_donacion', component: require('$comp/admin/beneficiario_donacion/Index'), meta: {rule: 'digcoin'} },
+        { path: 'beneficiarios-de-desarrollo', name: 'beneficiario_desarrollo', component: require('$comp/admin/beneficiario_desarrollo/Index'), meta: {rule: 'digcoin'} },
         
         
 
         /* 3 Modulo de actividades de produccion */
-        
+
+        { path: 'caracteristicas_produccion', name: 'caracteristica_produccion', component: require('$comp/admin/caracteristica_produccion/Index'), meta: {rule: 'digcoin'} },
+        { path: 'autorizacion_renov_parcela', name: 'autorizacion_renov_parcela', component: require('$comp/admin/autorizacion_renov_parcela/Index'), meta: {rule: 'digcoin'} },
+        { path: 'consulta_ren_ver', name: 'consulta_ren_ver', component: require('$comp/admin/consulta_ren_ver/Index'), meta: {rule: 'digcoin'} },
+
         /* 4 Modulo de actividades de comercializacion*/
 
         { path: 'guias_internacion', name: 'guia_internacion', component: require('$comp/admin/guia_internacion/Index'), meta: {rule: 'digcoin'} },
@@ -59,6 +64,10 @@ export default [
         
         /* 6 Modulo de resoluciones */
         { path: 'resoluciones_administrativas', name: 'resolucion_administrativa', component: require('$comp/admin/resolucion_administrativa/Index'), meta: {rule: 'digcoin'} },
+        { path: 'consulta_res_administrativa', name: 'consulta_res_administrativa', component: require('$comp/admin/consulta_res_administrativa/Index'), meta: {rule: 'digcoin'} },
+        { path: 'sanciones_monetarias', name: 'sanciones_monetarias', component: require('$comp/admin/sanciones_monetarias/Index'), meta: {rule: 'digcoin'} },
+        { path: 'consulta_infracciones_san', name: 'consulta_infracciones_san', component: require('$comp/admin/consulta_infracciones_san/Index'), meta: {rule: 'digcoin'} },
+        
         
         /* 7 Modulo de reportes */
         
@@ -67,7 +76,7 @@ export default [
         /* 9 Modulo de Usuarios y roles */
 
         /* 10 Modulo de parametrizado */
-        { path: 'zona_productiva', name: 'zona_productiva', component: require('$comp/admin/zona_productiva/Index'), meta: {rule: 'admin'} },
+        { path: 'zona_autorizada', name: 'zona_autorizada', component: require('$comp/admin/zona_autorizada/Index'), meta: {rule: 'admin'} },
         { path: 'departamentos', name: 'departamento', component: require('$comp/admin/departamento/Index'), meta: {rule: 'admin'} },
         { path: 'provincias', name: 'provincia', component: require('$comp/admin/provincia/Index'), meta: {rule: 'admin'} },
         { path: 'municipios', name: 'municipio', component: require('$comp/admin/municipio/Index'), meta: {rule: 'admin'} },

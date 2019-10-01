@@ -36,7 +36,7 @@
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs6>
-                      <v-text-field
+                      <v-text-field                     
                         v-model="selectedEmpresa.telefono"
                         label="Telefono de la empresa"
                         :rules="[v => !!v || 'Requerido', v => (v && v.length <= 15) || 'No mayor a 15 caracteres']"
@@ -473,8 +473,6 @@ export default {
       }
     },
     
-    
-    
     nextStep() {
       switch (this.step) {
         case 1:
@@ -538,6 +536,9 @@ export default {
       if (!value) return ''
       return (Math.floor((value) * 10000) / 100).toFixed(0) + '%'
     }
-  }
+  },
+  
+
+
 };
 </script>

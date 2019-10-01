@@ -20,6 +20,7 @@ class CreateActionsTable extends Migration
             $table->string('method');
             $table->string('path');
             $table->json('data');
+            $table->string('ip_address');
             $table->timestamps();
         });
     }

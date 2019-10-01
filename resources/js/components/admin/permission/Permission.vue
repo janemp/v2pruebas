@@ -43,13 +43,13 @@
                     <td class="text-xs-center">{{ props.item.created_at | moment("DD/MM/YYYY")}}</td>
                     <td class="justify-center layout">
                         <v-tooltip top>
-                            <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)" :disabled="true">
+                            <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
                             <v-icon>edit</v-icon>
                             </v-btn>
                             <span>Editar</span>
                         </v-tooltip>
                         <v-tooltip top>
-                            <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)" :disabled="true">
+                            <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)">
                             <v-icon>delete</v-icon>
                             </v-btn>
                             <span>Eliminar</span>

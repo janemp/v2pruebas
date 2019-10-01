@@ -88,4 +88,16 @@ class Persona extends Model
     public function resoluciones_administrativas(){
         return $this->hasMany(ResolucionAdministrativa::class);
     }
+
+    public function infracciones(){
+        return $this->belongsToMany(Infraccion::class,'comercializador_infraccions');
+    }
+  
+    public function puestos_venta(){
+        return $this->belongsToMany(PuestoVenta::class);
+    }
+
+    public function parcelas(){
+        return $this->belongsToMany(Parcela::class, 'persona_parcela');
+    }   
 }

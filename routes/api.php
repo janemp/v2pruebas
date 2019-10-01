@@ -226,10 +226,58 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::post('tipo_resolucion', 'TipoResolucionController@store')->middleware('permission:registrar');
         Route::put('tipo_resolucion/{id}', 'TipoResolucionController@update')->middleware('permission:editar');
         Route::delete('tipo_resolucion/{id}', 'TipoResolucionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('tipo_sancion', 'TipoSancionController@index')->middleware('permission:listar');
+        Route::post('tipo_sancion', 'TipoSancionController@store')->middleware('permission:registrar');
+        Route::put('tipo_sancion/{id}', 'TipoSancionController@update')->middleware('permission:editar');
+        Route::delete('tipo_sancion/{id}', 'TipoSancionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('sancion/fill/{param}', 'SancionController@fill');
+        Route::get('sancion/showfill/{param}', 'SancionController@showfill');
+        Route::get('sancion', 'SancionController@index')->middleware('permission:listar');
+        Route::post('sancion', 'SancionController@store')->middleware('permission:registrar');
+        Route::put('sancion/{id}', 'SancionController@update')->middleware('permission:editar');
+        Route::delete('sancion/{id}', 'SancionController@destroy')->middleware('permission:eliminar');
+        
+        Route::get('infraccion/fill/{param}', 'InfraccionController@fill');
+        Route::get('infraccion', 'InfraccionController@index')->middleware('permission:listar');
+        Route::post('infraccion', 'InfraccionController@store')->middleware('permission:registrar');
+        Route::put('infraccion/{id}', 'InfraccionController@update')->middleware('permission:editar');
+        Route::delete('infraccion/{id}', 'InfraccionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('comercializador_infraccion/fill/{param}', 'ComercializadorInfraccionController@fill');
+        Route::get('comercializador_infraccion', 'ComercializadorInfraccionController@index')->middleware('permission:listar');
+        Route::post('comercializador_infraccion', 'ComercializadorInfraccionController@store')->middleware('permission:registrar');
+        Route::put('comercializador_infraccion/{id}', 'ComercializadorInfraccionController@update')->middleware('permission:editar');
+        Route::delete('comercializador_infraccion/{sancion_id}', 'ComercializadorInfraccionController@destroy')->middleware('permission:eliminar');
+
+        Route::get('motivoactualizacion/fill/{params}', 'MotivoActualizacionController@fill')->middleware('permission:listar');
+        Route::get('motivoactualizacion', 'MotivoActualizacionController@index')->middleware('permission:listar');
+        Route::post('motivoactualizacion', 'MotivoActualizacionController@store')->middleware('permission:registrar');
+        Route::put('motivoactualizacion/{id}', 'MotivoActualizacionController@update')->middleware('permission:editar');
+        Route::delete('motivoactualizacion/{id}', 'MotivoActualizacionController@destroy')->middleware('permission:eliminar');
+        
+        Route::get('parcela/fill/{param}', 'ParcelaController@fill');
+        Route::get('parcela', 'ParcelaController@index')->middleware('permission:listar');  
+        Route::post('parcela', 'ParcelaController@store')->middleware('permission:registrar');
+        Route::put('parcela/{id}', 'ParcelaController@update')->middleware('permission:editar');
+        Route::delete('parcela/{id}', 'ParcelaController@destroy')->middleware('permission:eliminar');
+        Route::get('parcela/showfill/{param}', 'ParcelaController@showfill');
+        Route::put('parcela/edit/{id}', 'ParcelaController@edit')->middleware('permission:editar');
+        Route::get('parcela/showfillver/{param}', 'ParcelaController@showfillver');
+
+        Route::get('autorizacionrenovacion/fill/{param}', 'AutorizacionRenovacionController@fill');
+        Route::get('autorizacionrenovacion/showfill/{id}', 'AutorizacionRenovacionController@showfill');
+        Route::get('autorizacionrenovacion', 'AutorizacionRenovacionController@index')->middleware('permission:listar');
+        Route::post('autorizacionrenovacion', 'AutorizacionRenovacionController@store')->middleware('permission:registrar');
+        Route::put('autorizacionrenovacion/{id}', 'AutorizacionRenovacionController@update')->middleware('permission:editar');
+        Route::delete('autorizacionrenovacion/{id}', 'AutorizacionRenovacionController@destroy')->middleware('permission:eliminar');
+
+
     });
     Route::group(['middleware' => ['role:admin|digprococa|digcoin|fonadin|oii']], function () {
-        Route::get('zona_productiva/fill/{param}', 'ZonaProductivaController@fill');
-        Route::resource('zona_productiva', 'ZonaProductivaController');
+        Route::get('zona_autorizada/fill/{param}', 'ZonaAutorizadaController@fill');
+        Route::resource('zona_autorizada', 'ZonaAutorizadaController');
         Route::get('departamento/fill/{param}', 'DepartamentoController@fill');
         Route::resource('departamento', 'DepartamentoController');
         Route::get('provincia/fill/{param}', 'ProvinciaController@fill');

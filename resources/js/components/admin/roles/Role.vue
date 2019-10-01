@@ -49,7 +49,7 @@
                             <span>Editar</span>
                         </v-tooltip>
                         <v-tooltip top>
-                            <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)" :disabled="true">
+                            <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)">                                  
                             <v-icon>delete</v-icon>
                             </v-btn>
                             <span>Eliminar</span>

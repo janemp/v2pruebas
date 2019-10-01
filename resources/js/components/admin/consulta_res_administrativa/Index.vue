@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <v-toolbar>
-        <v-toolbar-title>Zonas Productivas</v-toolbar-title>
-        <v-spacer></v-spacer>        
+        <v-toolbar-title>Consulta de Resoluciones Administrativas</v-toolbar-title>
+        <v-spacer></v-spacer>   
         <v-divider
           class="mx-2"
           inset
@@ -24,7 +24,6 @@
           vertical
         ></v-divider>
         <Form :bus="bus"/>
-        <RemoveItem :bus="bus"/>
     </v-toolbar>
     <v-data-table
         :headers="headers"
@@ -35,26 +34,20 @@
         class="elevation-1">
         <template slot="items" slot-scope="props">
           <tr>
-            <td class="text-xs-center"> {{ props.item.codigo }} </td>
-            <td class="text-xs-center"> {{ props.item.nombre }} </td>
-            <td class="text-xs-center"> <v-chip small v-bind:color="props.item.color" v-bind:text-color="props.item.color"></v-chip></td>
-            <td class="text-xs-center"> {{ props.item.descripcion }} </td>
-            <td class="justify-center layout">              
+            <!--<td class="text-xs-center"> {{ props.item }} </td>-->
+            <td class="text-xs-center"> {{ props.item.resolucion }} </td>
+            <td class="text-xs-center"> {{ props.item.tipo_resolucion.nombre }} </td>
+            <td class="justify-center layout">
               <v-tooltip top>
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
-                  <v-icon>edit</v-icon>
+                <v-btn slot="activator" flat icon color="indigo" @click="resolucionItem(props.item)">
+                  <v-icon>assignment</v-icon>
                 </v-btn>
-                <span>Editar</span>
-              </v-tooltip>
-              <v-tooltip top>
-                <v-btn slot="activator" flat icon color="red darken-3" @click="removeItem(props.item)">
-                  <v-icon>delete</v-icon>
-                </v-btn>
-                <span>Eliminar</span>
+                <span>Resolución Administrativa</span>
               </v-tooltip>
             </td>
           </tr>
-        </template>        
+        </template>
+         
         <v-alert slot="no-results" :value="true" color="error" icon="fa fa-times">
           Tu Busqueda de "{{ search }}" no encontró resultados.
         </v-alert>
@@ -69,41 +62,30 @@
 <script type="text/javascript">
 import Vue from "vue";
 import axios from 'axios'
-import RemoveItem from "../RemoveItem";
-import Form from "./Form";
+import Form from "./Form"
 
 export default {
   components: {
-    RemoveItem,
     Form,
   },
   data: () => ({
     bus: new Vue(),
     headers: [
       {
-        text: "Codigo",
-        value: "codigo",
-        align: "center"
+        text: "Nro. Resolución",
+        value: "resolucion",
+        align:"center",
       },
       {
-        text: "Nombre",
-        value: "nombre",
-        align: "center"
-      },
-      {
-        text: "Color",
-        value: "color",
-        align: "center"
-      },
-      {
-        text: "Descripción",
-        value: "descripcion",
-        align: "center"
+        text: "Tipo de resolución",
+        value: "tipo_resolucion.nombre",
+        align: "center",        
       },
       {
         text: "Opciones",
         align: "center",
-        sortable: false
+        sortable: false,
+        width: "270"
       }
     ],
     table: [],
@@ -118,19 +100,17 @@ export default {
   },
   methods: {
     async getTable() {
-      try {
-        let res = await axios.get("api/zona_productiva")
-        this.table = res.data;
+      try {        
+        let res = await axios.get("api/resolucion_administrativa/")        
+        this.table = res.data
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
     },
-    editItem(item) {
-      this.bus.$emit("openDialog", item);
+    resolucionItem(item) {
+    this.bus.$emit("openDialogForm", item);
     },
-    async removeItem(item) {
-      this.bus.$emit("openDialogRemove", `api/zona_productiva/${item.id}`);      
-    },
-  }
+  }, 
+  
 };
 </script>

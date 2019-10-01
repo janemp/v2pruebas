@@ -44,7 +44,7 @@
               <v-chip color="default" text-color="white" v-if="props.item.estado==true">Concluido</v-chip>
             </td>
             <td class="justify-center layout">
-              <v-tooltip top>
+              <v-tooltip top v-if="$store.getters['auth/user'].roles.filter(e => e.name === 'admin').length > 0">
                 <v-btn slot="activator" flat icon color="indigo" @click="printItem(props.item)">
                   <v-icon>print</v-icon>
                 </v-btn>
@@ -206,7 +206,7 @@ export default {
       }
     ],
     table: [],
-    search: "",
+    search: ""
   }),
   computed: {},
   mounted() {

@@ -20,6 +20,10 @@ class CreateSancionsTable extends Migration
             $table->string('codigo', 5);
             $table->string('nombre', 100);
             $table->string('descripcion', 500);
+            $table->decimal('monto');
+            $table->boolean('bloqueante')->default(false);
+            $table->string('estado',1);
+            $table->string('adjunto')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

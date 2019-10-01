@@ -2,15 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Infraccion extends Model
 {
     use SoftDeletes;
+    protected $table = 'infracciones';
     public $timestamps = true;
     public $guarded = ['id'];
-    protected $table = 'infracciones';
+    
     
     /**
      * The attributes that are mass assignable.
@@ -18,8 +19,27 @@ class Infraccion extends Model
      * @var array
      */
     protected $fillable = [
-        'severidad', 'codigo', 'nombre', 'descripcion'
+        'codigo', 'nombre', 'descripcion', 'severidad', 'bloqueante','estado'
     ];
 
-    
+    /**
+     * Definicion de relaciones.
+     */
+
+    // public function sancion() 
+    // {
+    //     return $this->belongsTo(Sancion::class);
+    // }
+
+    public function personas(){
+        //return $this->belongsToMany(Persona::class, 'comercializador_infraccions');
+        return $this->belongsTo(Persona::class, 'comercializador_infraccions');
+
+    }
+
+    public function comercializadorinfraccion(){
+        return $this->belongsToMany(ComercializadorInfraccion::class, 'persona');
+    }
+
+
 }
