@@ -98,6 +98,6 @@ class Persona extends Model
     }
 
     public function parcelas(){
-        return $this->ManytoMany(Parcela::class);
-    }
+        return $this->belongsToMany(Parcela::class, 'persona_parcela');
+    }   
 }

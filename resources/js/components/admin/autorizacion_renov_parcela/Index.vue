@@ -24,6 +24,7 @@
           vertical
         ></v-divider>
         <Form :bus="bus"/>
+        <Verificacion :bus="bus"/>
     </v-toolbar>
     <v-data-table
         :headers="headers"
@@ -44,7 +45,7 @@
                 <span>Registro de Renovación</span>
               </v-tooltip>
               <v-tooltip top>
-                <v-btn slot="activator" flat icon color="indigo" @click="editItem(props.item)">
+                <v-btn slot="activator" flat icon color="indigo" @click="formItem(props.item)">
                   <v-icon>assignment</v-icon>
                 </v-btn>
                 <span>Verificación de Renovación</span>
@@ -129,10 +130,13 @@
 import Vue from "vue";
 import axios from 'axios'
 import Form from "./Form";
+import Verificacion from "./Verificacion";
+
 
 export default {
   components: {
-    Form
+    Form,
+    Verificacion
   },
   data: () => ({
     bus: new Vue(),
@@ -155,33 +159,93 @@ export default {
       }
     ],
     table: [],
+    idpersona:0,
     search: "",
   }),
   computed: {},
   mounted() {
+           
     this.getTable();
     this.bus.$on("closeDialog", () => {
-      this.getTable();
+    this.getTable();
+    this.idpersona= item.id
+    this.selectedItem= idpersona   
+
     });
+
+    this.bus.$on("openDialogForm", item  => {
+    this.idpersona= item.id
+    this.dialog = true
+    this.selectedItem = item 
+    this.selectedIndex = item
+    this.getTable2();
+    });
+
+
+    // this.bus.$on("openDialogVer", item  => {
+    // this.idpersona= item.id
+    // this.dialog = true
+    // this.selectedItem = item 
+    // this.selectedIndex = item
+    // this.getTableVerificacion();
+    // });
   },
   methods: {
+    close() {
+      this.dialog = false;
+      this.selectedIndex = -1
+      this.selectedItem = {}  
+      this.table = []      
+      this.bus.$emit("closeDialog",this.selectedItem)
+    },
+
     async getTable() {
       try {
         let res = await axios.get("api/persona/fill/" + JSON.stringify({'tipo_persona_id': 1}))
         this.table = res.data
       } catch (e) {
         console.log(e)
-      }
+      }    
+    }, 
+    
+    async getTable2() {
+      try {        
+        
+        let res = await axios.get("api/parcela/showfill/" + this.selectedItem.id )
+        this.table2 = res.data;
+        //console.log(this.table2)
+      } catch (e) {
+        console.log(e);
+      }    
     },
-    editItem(item, mode) {
-      this.bus.$emit("openDialog", Object.assign(item, mode));
-    },    
+
+    async getTableVerificacion() {
+      try {        
+        
+        let res = await axios.get("api/parcela/showfillver/" + this.selectedItem.id )
+        this.table2 = res.data;
+        //console.log(this.table2)
+      } catch (e) {
+        console.log(e);
+      }    
+    },
+
+    editItem(item) {    
+      this.bus.$emit("openDialogForm", (item));
+    },   
+    
+    formItem(item) {    
+      this.bus.$emit("openDialogVer", (item));
+    }, 
+
     fullName(item) {
       return [item.nombre, item.primer_apellido, item.segundo_apellido].join(" ")
     },
+
     image(item) {
       return item.fotografia
     },
+
     formatDate(date){
       return this.$moment(date).format("DD/MM/YYYY")
     }

@@ -1,9 +1,5 @@
 <template>
   <v-dialog persistent v-model="dialog" max-width="900px" @keydown.esc="close">
-    <!-- <v-tooltip slot="activator" top>
-      <v-icon large slot="activator" dark color="indigo">add_circle</v-icon>
-      <span>Registrar Cumplimiento</span>
-    </v-tooltip> -->
     <v-card>
       <v-toolbar dark color="primary">
         <v-toolbar-title class="white--text">{{ formTitle }}</v-toolbar-title>
@@ -141,14 +137,6 @@ export default {
   },
   created() {},  
   mounted() {
-    // console.log(this.selectedItem)
-    // this.bus.$on("openDialogSancion", item => {
-    //   console.log(item) 
-    //   this.selectedItem = item;
-    //   this.dialog = true;
-    //   this.selectedIndex = item;     
-    //   this.selectedItem.comercializador_id= item.comercializador_id;
-    // });
 
     this.bus.$on("openDialogForm1", item => {
       this.selectedItem.persona_id= item;
@@ -168,8 +156,6 @@ export default {
   computed: {
     formTitle() {
       return this.selectedIndex === -1 ? 'Nuevo ' : 'Editar '
-      console.log(this.selectedIndex)
-      //return this.selectedItem.mode === 'Nuevo' ? 'Nuevo ' : 'Editar '
     }    
   },
   methods: {
@@ -183,11 +169,6 @@ export default {
       this.tiposSancion = res.data
     },
 
-    //  async getTiposInfraccion() {
-    //   let res = await axios.get("api/tipo_infraccion")
-    //   this.tiposInfraccion = res.data
-    // },
-     
     complete (file, status, xhr) {
       this.fileAdjunto = xhr.response
       this.valArchivo = "Cargado correctamente."
@@ -204,11 +185,7 @@ export default {
     },
     async save() {
       try {
-        if (this.$refs.form.validate()) { 
-          // console.log(this.selectedItem)
-          // let res = await axios.get('api/sancion', this.selectedItem)
-
-     
+        if (this.$refs.form.validate()) {      
           if (this.selectedItem.mode == 'Editar') {
             await axios.put("api/sancion/"+this.selectedItem.id, this.selectedItem)
           } 
@@ -216,12 +193,6 @@ export default {
             this.selectedItem.adjunto = this.fileAdjunto
             this.selectedItem.estado = 1
             await axios.post("api/sancion", this.selectedItem)
-            // var data = {
-            // 'sancion_id': this.sancion_id,
-            // 'persona_id': this.selectedItem.persona_id
-            // }
-            // console.log(data)
-            // await axios.post('api/comercializador_infraccion', data)  
           }
           this.$toast.success('Correcto.')
           this.close();

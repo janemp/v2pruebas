@@ -256,6 +256,22 @@ Route::group(['middleware' => ['jwt']], function() {
         Route::post('motivoactualizacion', 'MotivoActualizacionController@store')->middleware('permission:registrar');
         Route::put('motivoactualizacion/{id}', 'MotivoActualizacionController@update')->middleware('permission:editar');
         Route::delete('motivoactualizacion/{id}', 'MotivoActualizacionController@destroy')->middleware('permission:eliminar');
+        
+        Route::get('parcela/fill/{param}', 'ParcelaController@fill');
+        Route::get('parcela', 'ParcelaController@index')->middleware('permission:listar');  
+        Route::post('parcela', 'ParcelaController@store')->middleware('permission:registrar');
+        Route::put('parcela/{id}', 'ParcelaController@update')->middleware('permission:editar');
+        Route::delete('parcela/{id}', 'ParcelaController@destroy')->middleware('permission:eliminar');
+        Route::get('parcela/showfill/{param}', 'ParcelaController@showfill');
+        Route::put('parcela/edit/{id}', 'ParcelaController@edit')->middleware('permission:editar');
+        Route::get('parcela/showfillver/{param}', 'ParcelaController@showfillver');
+
+        Route::get('autorizacionrenovacion/fill/{param}', 'AutorizacionRenovacionController@fill');
+        Route::get('autorizacionrenovacion/showfill/{id}', 'AutorizacionRenovacionController@showfill');
+        Route::get('autorizacionrenovacion', 'AutorizacionRenovacionController@index')->middleware('permission:listar');
+        Route::post('autorizacionrenovacion', 'AutorizacionRenovacionController@store')->middleware('permission:registrar');
+        Route::put('autorizacionrenovacion/{id}', 'AutorizacionRenovacionController@update')->middleware('permission:editar');
+        Route::delete('autorizacionrenovacion/{id}', 'AutorizacionRenovacionController@destroy')->middleware('permission:eliminar');
 
 
     });

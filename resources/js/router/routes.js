@@ -40,6 +40,7 @@ export default [
 
         { path: 'caracteristicas_produccion', name: 'caracteristica_produccion', component: require('$comp/admin/caracteristica_produccion/Index'), meta: {rule: 'digcoin'} },
         { path: 'autorizacion_renov_parcela', name: 'autorizacion_renov_parcela', component: require('$comp/admin/autorizacion_renov_parcela/Index'), meta: {rule: 'digcoin'} },
+        { path: 'consulta_ren_ver', name: 'consulta_ren_ver', component: require('$comp/admin/consulta_ren_ver/Index'), meta: {rule: 'digcoin'} },
 
         /* 4 Modulo de actividades de comercializacion*/
 

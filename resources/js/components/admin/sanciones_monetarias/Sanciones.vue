@@ -182,7 +182,6 @@ export default {
   computed: {},
   mounted() {
     this.bus.$on("openDialogSancion", item  => {
-      console.log(item)
       this.idpersona= item.id
       this.dialog = true
       this.selectedItem = item 

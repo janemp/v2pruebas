@@ -17,8 +17,8 @@ class MotivosActualizacionSeeder extends Seeder
             ['id'=>'2','nombre' => 'Pérdida total o parcial por desastres naturales.'],
             ['id'=>'3','nombre' => 'Disminución del rendimiento del cultivo.'],
             ['id'=>'4','nombre' => 'Afectación del Predio agrícola por construcción.'],
-            ['id'=>'5','nombre' => 'Afectación por ampliación del área urbana.'],
-            ['id'=>'6','nombre' => 'Desplazamiento de parcelas de coca catastradas.'],            
+            // ['id'=>'5','nombre' => 'Afectación por ampliación del área urbana.'],
+            // ['id'=>'6','nombre' => 'Desplazamiento de parcelas de coca catastradas.'],            
         ];	
         foreach ($data as $data) {
 			App\MotivosActualizacion::create($data);

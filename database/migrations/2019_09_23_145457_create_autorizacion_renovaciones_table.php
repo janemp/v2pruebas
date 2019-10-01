@@ -18,8 +18,6 @@ class CreateAutorizacionRenovacionesTable extends Migration
             $table->string('informe_adjunto',255)->nullable();;
             $table->string('observaciones',255)->nullable();;            
             $table->boolean('verificacion_destruccion')->nullable();;
-            $table->integer('persona_parcela_id')->unsigned()->nullable();;
-            $table->foreign('persona_parcela_id')->references('id')->on('persona_parcela');
             $table->timestamps();
             $table->softDeletes();
         });

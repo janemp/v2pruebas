@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Parcela;
 use Illuminate\Http\Request;
+use DB;
+use App\AutorizacionRenovacion;
+use App\Persona;
 
 class ParcelaController extends Controller
 {
@@ -14,7 +17,7 @@ class ParcelaController extends Controller
      */
     public function index()
     {
-        return Parcela::with('personas')->get();
+        return Parcela::with('personas', 'comunidad', 'region','autorizacionrenovacion')->get();
     }
 
     /**
@@ -38,7 +41,7 @@ class ParcelaController extends Controller
      */
     public function show($id)
     {
-        return Parcela::findOrFail($id);
+        return Parcela::with('personas', 'comunidad', 'region','autorizacionrenovacion')->findOrFail($id);
     }
 
     /**
@@ -72,6 +75,39 @@ class ParcelaController extends Controller
     public function fill($request) 
     {
         $request = json_decode($request, true);
-        return Parcela::with('personas')->where($request)->get();
+        return Parcela::with('personas', 'comunidad', 'region','autorizacionrenovacion')->where($request)->get();
     }
+
+    public function showfill($idPersona) 
+    {
+        return  $results = DB::select('select distinct parcelas.id,  parcelas.region_id, parcelas.codigo_catastral, parcelas.latitud, parcelas.longitud,
+        parcelas.motivo_actualizacion_id, autorizacion_renovaciones.observaciones, autorizacion_renovaciones.informe_adjunto
+        from parcelas 
+        left join autorizacion_renovaciones on parcelas.autorizacion_id=autorizacion_renovaciones.id 
+        inner join persona_parcela on parcelas.id = persona_parcela.parcela_id       
+        where parcelas.deleted_at is null and persona_parcela.persona_id = ?', [$idPersona]);
+    }
+
+    public function showfillver($idPersona) 
+    {
+        return  $results = DB::select('select distinct parcelas.id,  parcelas.region_id, parcelas.codigo_catastral, parcelas.latitud, parcelas.longitud,
+        parcelas.motivo_actualizacion_id, autorizacion_renovaciones.observaciones, autorizacion_renovaciones.informe_adjunto
+        from parcelas 
+        inner join autorizacion_renovaciones on parcelas.autorizacion_id=autorizacion_renovaciones.id 
+        inner join persona_parcela on parcelas.id = persona_parcela.parcela_id       
+        where parcelas.deleted_at is null and persona_parcela.persona_id = ?', [$idPersona]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $parcela =  Parcela::findOrFail($id);
+        $parcela->fill($request->all());
+        $parcela->save();
+
+        $parcela = Parcela::findOrFail($request->id); 
+        $lastInsertId = AutorizacionRenovacion::orderBy('created_at', 'desc')->first();
+        $parcela->autorizacion_id = $lastInsertId->id;
+        $parcela->save();  
+        return  $parcela;
+    }   
 }

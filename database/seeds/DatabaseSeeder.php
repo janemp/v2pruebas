@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MotivosActualizacionSeeder::class);
         // $this->call(RolesSeeder::class);
         // $this->call(PermisosSeeder::class);
-        // $this->call(LaratrustSeeder::class);        
+        // $this->call(LaratrustSeeder::class);      
+        
+        $this->call(PruebaSeeder::class);
     }
 }

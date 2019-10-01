@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\AutorizacionRenovacion;
 use Illuminate\Http\Request;
+use DB;
+use App\Parcela;
 
 class AutorizacionRenovacionController extends Controller
 {
@@ -14,7 +16,7 @@ class AutorizacionRenovacionController extends Controller
      */
     public function index()
     {
-        return AutorizacionRenovacion::get();
+        return AutorizacionRenovacion::with('parcela')->get();
     }
 
      /**
@@ -25,7 +27,11 @@ class AutorizacionRenovacionController extends Controller
      */
     public function store(Request $request)
     {
+        // $autorizacion = AutorizacionRenovacion::create($request->all());
+        // $autorizacion->parcelas()->attach($request->parcelas);
+        // return $autorizacion;
         return AutorizacionRenovacion::create($request->all());
+
     }
 
     /**
@@ -83,6 +89,16 @@ class AutorizacionRenovacionController extends Controller
     public function fill($request) 
     {
         $request = json_decode($request, true);
-        return AutorizacionRenovacion::where($request)->get();
+        return AutorizacionRenovacion::with('parcela')->where($request)->get();
+    }
+
+    public function showfill($idParcela) 
+    {
+        return  $results = DB::select('select distinct autorizacion_renovaciones.id,comunidades.nombre, parcelas.hectareas, parcelas.latitud, parcelas.longitud,
+        parcelas.descripcion, autorizacion_renovaciones.verificacion_destruccion
+        from parcelas 
+        inner join autorizacion_renovaciones on parcelas.autorizacion_id=autorizacion_renovaciones.id    
+        inner join comunidades on parcelas.comunidad_id = comunidades.id
+        where parcelas.deleted_at is null and parcelas.id = ?', [$idParcela]);
     }
 }
